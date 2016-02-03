@@ -10,9 +10,9 @@ import org.smellycat.springmvc.domain.SmellyClass;
 import org.smellycat.springmvc.smells.SmellsRequestor;
 import org.smellycat.springmvc.smells.controller.PromiscuousController;
 
-public class Tool {
+public class SmellyCat {
 	
-	private static Logger log = Logger.getLogger(Tool.class);
+	private static Logger log = Logger.getLogger(SmellyCat.class);
 	private PrintStream output;
 
 	private Repository repo;
@@ -28,11 +28,11 @@ public class Tool {
 
 		PrintStream output = new PrintStream(outputPath);
 		Repository repo = new Repository();
-		new Tool(projectPath, output, repo).execute();
+		new SmellyCat(projectPath, output, repo).execute();
 		output.close();
 	}
 	
-	public Tool(String projectPath, PrintStream output, Repository repo) {
+	public SmellyCat(String projectPath, PrintStream output, Repository repo) {
 		this.projectPath = projectPath;
 		this.output = output;
 		this.repo = repo;

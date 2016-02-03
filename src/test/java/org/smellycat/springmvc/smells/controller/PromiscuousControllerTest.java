@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.smellycat.springmvc.Tool;
+import org.smellycat.springmvc.SmellyCat;
 import org.smellycat.springmvc.domain.SmellyClass;
 import org.smellycat.springmvc.smells.SmellTest;
 
@@ -12,7 +12,7 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldCountNumberOfRoutes() throws UnsupportedEncodingException {
-		Tool tool = new Tool(basePath + "promiscuous-controller/t1", ps, repo);
+		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t1", ps, repo);
 		tool.execute();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceController");
@@ -21,7 +21,7 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldCountNumberOfServices() throws UnsupportedEncodingException {
-		Tool tool = new Tool(basePath + "promiscuous-controller/t1", ps, repo);
+		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t1", ps, repo);
 		tool.execute();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceController");
@@ -36,7 +36,7 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldDetectTheSmells() throws UnsupportedEncodingException {
-		Tool tool = new Tool(basePath + "promiscuous-controller/t2", ps, repo);
+		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t2", ps, repo);
 		tool.execute();
 		
 		SmellyClass sc = repo.getByClass("mfa.t2.InvoiceController");
@@ -48,7 +48,7 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldUnderstandServiceInterfaces() throws UnsupportedEncodingException {
-		Tool tool = new Tool(basePath + "promiscuous-controller/t3", ps, repo);
+		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t3", ps, repo);
 		tool.execute();
 		
 		SmellyClass sc = repo.getByClass("mfa.t3.InvoiceController");
