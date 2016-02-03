@@ -1,20 +1,20 @@
-package mfa.t2;
+package mfa.t3;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import mfa.t2.p1.InvoiceService1;
 
 @Controller
-class NormalController {
+@X
+class InvoiceController {
 
 	@Autowired
-	private InvoiceService1 service1;
+	private InvoiceService service;
 
 	@RequestMapping
-	public void m1() {
+	public void add() {
 
-		service1.action1();
+		service.action1();
 	}
 
 }
