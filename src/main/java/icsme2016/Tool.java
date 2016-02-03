@@ -19,12 +19,13 @@ public class Tool {
 	private Repository repo;
 
 	private Parser parser;
+	private String projectPath;
 
 	public static void main(String[] args) throws FileNotFoundException {
-//		String projectPath = "/Users/mauricioaniche/Desktop/projects/SSP";
-//		String outputPath = "/Users/mauricioaniche/Desktop/projects/tool.csv";
-		String projectPath = args[0];
-		String outputPath = args[1];
+		String projectPath = "/Users/mauricioaniche/Desktop/projects/SSP";
+		String outputPath = "/Users/mauricioaniche/Desktop/projects/tool.csv";
+//		String projectPath = args[0];
+//		String outputPath = args[1];
 
 		PrintStream output = new PrintStream(outputPath);
 		Repository repo = new Repository();
@@ -33,15 +34,19 @@ public class Tool {
 	}
 	
 	public Tool(String projectPath, PrintStream output, Repository repo) {
+		this.projectPath = projectPath;
 		this.output = output;
 		this.repo = repo;
-
-		parser = new Parser(projectPath);
 	}
 	
 	public void execute() {
 		long startTime = System.currentTimeMillis();
-		log.info("Starting the tool");
+		log.info("# ----------------------------- #");
+		log.info("#    Smelly Cat - Spring MVC    #");
+		log.info("# ----------------------------- #");
+
+		log.info("Starting the parse engine");
+		parser = new Parser(projectPath);
 		
 		identifyRoles();
 		searchSmells();
@@ -58,6 +63,7 @@ public class Tool {
 			output.println(
 				clazz.getFile() + "," +
 				clazz.getName() + "," +
+				clazz.getRole() + "," +
 				clazz.getAttribute("number-of-routes") + "," +
 				clazz.getAttribute("number-of-services-as-dependencies")
 			);

@@ -32,7 +32,7 @@ public class SmellsRequestor extends FileASTRequestor {
 			log.info("Analysing class " + clazz.getName());
 			
 			for(Smell smell : smells) {
-				log.info("-- Smell detector: " + clazz.getClass().getSimpleName());
+				log.info("-- Smell detector: " + smell.getClass().getSimpleName());
 				for(Callable<ASTVisitor> visitorInstantiator : smell.analyzers(repo, clazz)) {
 					ASTVisitor visitor = visitorInstantiator.call();
 					log.info("--- Calculating " + visitor.getClass().getSimpleName());
