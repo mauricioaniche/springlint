@@ -19,7 +19,7 @@ public class SmellTest {
 	@Before
 	public void setUp() {
 		this.repo = new Repository();
-		this.basePath = "/Users/mauricioaniche/textos/icsme2016/java/tool/test-repo/";
+		this.basePath = Repository.class.getResource("/").getPath() + "../../test-repo/";
 		
 		baos = new ByteArrayOutputStream();
 		ps = new PrintStream(baos);
