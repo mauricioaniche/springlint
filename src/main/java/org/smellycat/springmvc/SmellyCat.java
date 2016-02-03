@@ -23,6 +23,12 @@ public class SmellyCat {
 	public static void main(String[] args) throws FileNotFoundException {
 //		String projectPath = "/Users/mauricioaniche/Desktop/projects/SSP";
 //		String outputPath = "/Users/mauricioaniche/Desktop/projects/tool.csv";
+		
+		if(args.length!=2) {
+			System.out.println("Usage: java -jar smellycat.jar /dir/to/the/project /dir/to/the/output/file.csv");
+			System.exit(-1);
+		}
+		
 		String projectPath = args[0];
 		String outputPath = args[1];
 
