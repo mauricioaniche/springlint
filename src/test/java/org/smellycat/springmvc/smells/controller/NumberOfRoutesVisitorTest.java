@@ -1,11 +1,12 @@
 package org.smellycat.springmvc.smells.controller;
 
 import java.io.ByteArrayInputStream;
+import java.util.Collections;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.smellycat.jdt.JDTRunner;
+import org.smellycat.jdt.SingleClassJDTRunner;
 import org.smellycat.springmvc.domain.SmellyClass;
 import org.smellycat.springmvc.smells.controller.NumberOfRoutesVisitor;
 
@@ -15,7 +16,7 @@ public class NumberOfRoutesVisitorTest {
 
 	@Before
 	public void setUp() {
-		clazz = new SmellyClass("a", "a", "class");
+		clazz = new SmellyClass("a", "a", "class", "", Collections.emptySet());
 	}
 	
 	@Test
@@ -34,7 +35,7 @@ public class NumberOfRoutesVisitorTest {
 				;
 		
 		NumberOfRoutesVisitor visitor = new NumberOfRoutesVisitor(clazz);
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(2, clazz.getAttribute("number-of-routes"));
 				
@@ -52,7 +53,7 @@ public class NumberOfRoutesVisitorTest {
 				;
 		
 		NumberOfRoutesVisitor visitor = new NumberOfRoutesVisitor(clazz);
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(1, clazz.getAttribute("number-of-routes"));
 		
@@ -70,7 +71,7 @@ public class NumberOfRoutesVisitorTest {
 				;
 		
 		NumberOfRoutesVisitor visitor = new NumberOfRoutesVisitor(clazz);
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(1, clazz.getAttribute("number-of-routes"));		
 	}
@@ -87,7 +88,7 @@ public class NumberOfRoutesVisitorTest {
 				;
 		
 		NumberOfRoutesVisitor visitor = new NumberOfRoutesVisitor(clazz);
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(0, clazz.getAttribute("number-of-routes"));
 		

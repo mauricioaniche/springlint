@@ -1,8 +1,11 @@
 package org.smellycat.springmvc.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Repository {
 
@@ -18,8 +21,8 @@ public class Repository {
 		return mapPerFile.get(sourceFilePath);
 	}
 
-	public SmellyClass add(String sourceFilePath, String className, String type) {
-		SmellyClass smellyClass = new SmellyClass(sourceFilePath, className, type);
+	public SmellyClass add(String sourceFilePath, String className, String type, String superclass, Set<String> interfaces) {
+		SmellyClass smellyClass = new SmellyClass(sourceFilePath, className, type, superclass, interfaces);
 		
 		mapPerFile.put(sourceFilePath, smellyClass);
 		mapPerName.put(className, smellyClass);
@@ -33,6 +36,16 @@ public class Repository {
 
 	public SmellyClass getByClass(String qualifiedName) {
 		return mapPerName.get(qualifiedName);
+	}
+
+	public List<SmellyClass> getSubtypesOf(String interfaceName) {
+		List<SmellyClass> subtypes = new ArrayList<>();
+		
+		for(SmellyClass sc : mapPerName.values()) {
+			if(sc.getInterfaces().contains(interfaceName))
+				subtypes.add(sc);
+		}
+		return subtypes;
 	}
 
 }

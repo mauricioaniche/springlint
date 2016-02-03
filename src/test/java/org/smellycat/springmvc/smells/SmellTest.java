@@ -16,7 +16,7 @@ public class SmellTest {
 	protected ByteArrayOutputStream baos;
 
 	@Before
-	public void setUp() {
+	public void setBasePath() {
 		this.repo = new Repository();
 		this.basePath = Repository.class.getResource("/").getPath() + "../../test-repo/";
 		
@@ -25,7 +25,7 @@ public class SmellTest {
 	}
 	
 	@After
-	public void tearDown() {
+	public void closePs() {
 		ps.close();
 	}
 	

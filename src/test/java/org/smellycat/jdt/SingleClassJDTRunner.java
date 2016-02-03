@@ -11,7 +11,7 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
-public class JDTRunner {
+public class SingleClassJDTRunner {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void visit(ASTVisitor visitor, InputStream f) {

@@ -1,6 +1,7 @@
 package org.smellycat.springmvc.smells.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
@@ -33,7 +34,8 @@ public class NumberOfServicesVisitor extends ASTVisitor {
 			ITypeBinding tb = (ITypeBinding) binding;
 			String className = tb.getQualifiedName();
 			
-			SmellyClass possibleService = repo.getByClass(className);
+			SmellyClass possibleService = getPossibleService(tb);
+			
 			boolean notMySelf = possibleService!= null && !possibleService.equals(clazz);
 			if(possibleService!= null && possibleService.is(ArchitecturalRole.SERVICE) && notMySelf) {
 				services.add(className);
@@ -42,6 +44,25 @@ public class NumberOfServicesVisitor extends ASTVisitor {
 		}
 		
 		return super.visit(node);
+	}
+
+	private SmellyClass getPossibleService(ITypeBinding tb) {
+		String className = tb.getQualifiedName();
+		SmellyClass possibleService;
+		if(tb.isInterface()) {
+			List<SmellyClass> subtypes = repo.getSubtypesOf(className);
+			possibleService = findService(subtypes);
+		} else {
+			possibleService = repo.getByClass(className);
+		}
+		return possibleService;
+	}
+
+	private SmellyClass findService(List<SmellyClass> subtypes) {
+		for(SmellyClass subtype : subtypes) {
+			if(subtype.is(ArchitecturalRole.SERVICE)) return subtype;
+		}
+		return null;
 	}
 
 }

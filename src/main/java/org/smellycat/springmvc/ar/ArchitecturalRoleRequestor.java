@@ -6,8 +6,6 @@ import org.eclipse.jdt.core.dom.FileASTRequestor;
 import org.smellycat.springmvc.domain.Repository;
 import org.smellycat.springmvc.domain.SmellyClass;
 
-import br.com.aniche.ck.metric.ClassInfo;
-
 public class ArchitecturalRoleRequestor extends FileASTRequestor {
 
 	private Repository repo;
@@ -22,16 +20,16 @@ public class ArchitecturalRoleRequestor extends FileASTRequestor {
 			CompilationUnit cu) {
 		
 		try {
-			ClassInfo info = new ClassInfo();
+			ClassInfoVisitor info = new ClassInfoVisitor();
 			cu.accept(info);
 			if(info.getClassName()==null) return;
 		
-			SmellyClass clazz = repo.add(sourceFilePath, info.getClassName(), info.getType());
+			SmellyClass clazz = repo.add(sourceFilePath, info.getClassName(), info.getType(), info.getSuperclass(), info.getInterfaces());
 			ArchitecturalRoleVisitor visitor = new ArchitecturalRoleVisitor();
 			cu.accept(visitor);
 			
 			clazz.setRole(visitor.getRole());
-			log.info(String.format("-- %s is a %s", clazz.getName(), clazz.getRole()));
+			log.info(String.format("-- %s is a %s (%s)", clazz.getName(), clazz.getRole(), clazz.getType()));
 		} catch(Exception e) {
 			// just ignore... sorry!
 			log.error("error in " + sourceFilePath, e);

@@ -44,6 +44,14 @@ public class PromiscuousControllerTest extends SmellTest {
 
 		sc = repo.getByClass("mfa.t2.NormalController");
 		Assert.assertFalse(sc.hasSmell("Promiscuous Controller"));
+	}
+
+	@Test
+	public void shouldUnderstandServiceInterfaces() throws UnsupportedEncodingException {
+		Tool tool = new Tool(basePath + "promiscuous-controller/t3", ps, repo);
+		tool.execute();
 		
+		SmellyClass sc = repo.getByClass("mfa.t3.InvoiceController");
+		Assert.assertEquals(1, sc.getAttribute("number-of-services-as-dependencies"));
 	}
 }

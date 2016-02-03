@@ -1,10 +1,10 @@
 package org.smellycat.springmvc.domain;
 
+import java.util.Collections;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.smellycat.springmvc.domain.ArchitecturalRole;
-import org.smellycat.springmvc.domain.SmellyClass;
 
 public class SmellyClassTest {
 
@@ -12,7 +12,7 @@ public class SmellyClassTest {
 
 	@Before
 	public void setUp() {
-		sc = new SmellyClass("/dir/File.java", "abc.File", "class");
+		sc = new SmellyClass("/dir/File.java", "abc.File", "class", "", Collections.emptySet());
 	}
 	
 	@Test

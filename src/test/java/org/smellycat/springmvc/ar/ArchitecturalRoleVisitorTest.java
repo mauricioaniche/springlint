@@ -5,7 +5,7 @@ import java.io.ByteArrayInputStream;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.smellycat.jdt.JDTRunner;
+import org.smellycat.jdt.SingleClassJDTRunner;
 import org.smellycat.springmvc.ar.ArchitecturalRoleVisitor;
 import org.smellycat.springmvc.domain.ArchitecturalRole;
 
@@ -22,7 +22,7 @@ public class ArchitecturalRoleVisitorTest {
 	public void shouldDetectControllers() {
 		String sc = "@Controller class Controller {}";
 		
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(ArchitecturalRole.CONTROLLER, visitor.getRole());
 	}
@@ -31,7 +31,7 @@ public class ArchitecturalRoleVisitorTest {
 	public void shouldDetectService() {
 		String sc = "@Service class Service {}";
 		
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(ArchitecturalRole.SERVICE, visitor.getRole());
 	}
@@ -40,7 +40,7 @@ public class ArchitecturalRoleVisitorTest {
 	public void shouldDetectComponent() {
 		String sc = "@Component class Service {}";
 		
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(ArchitecturalRole.COMPONENT, visitor.getRole());
 	}
@@ -49,7 +49,7 @@ public class ArchitecturalRoleVisitorTest {
 	public void shouldDetectRepository() {
 		String sc = "@Repository class Repository {}";
 		
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(ArchitecturalRole.REPOSITORY, visitor.getRole());
 	}
@@ -58,7 +58,7 @@ public class ArchitecturalRoleVisitorTest {
 	public void shouldDetectEntity() {
 		String sc = "@Entity class Invoice {}";
 		
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(ArchitecturalRole.ENTITY, visitor.getRole());
 	}
@@ -67,7 +67,7 @@ public class ArchitecturalRoleVisitorTest {
 	public void unindentifiedOtherwise() {
 		String sc = "@Bla class Invoice {}";
 		
-		new JDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
+		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
 		Assert.assertEquals(ArchitecturalRole.UNINDENTIFIED, visitor.getRole());
 	}

@@ -2,6 +2,7 @@ package org.smellycat.springmvc.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class SmellyClass {
 
@@ -11,11 +12,15 @@ public class SmellyClass {
 	private ArchitecturalRole role;
 	private Map<String, String> smells;
 	private Map<String, Integer> attributes;
+	private String superclass;
+	private Set<String> interfaces;
 	
-	public SmellyClass(String file, String name, String type) {
+	public SmellyClass(String file, String name, String type, String superclass, Set<String> interfaces) {
 		this.file = file;
 		this.name = name;
 		this.type = type;
+		this.superclass = superclass;
+		this.interfaces = interfaces;
 		this.smells = new HashMap<String, String>();
 		this.attributes = new HashMap<String, Integer>();
 		this.role = ArchitecturalRole.UNINDENTIFIED;
@@ -106,6 +111,13 @@ public class SmellyClass {
 		return smells.get(smell);
 	}
 
+	public String getSuperclass() {
+		return superclass;
+	}
+	
+	public Set<String> getInterfaces() {
+		return interfaces;
+	}
 	
 	
 }
