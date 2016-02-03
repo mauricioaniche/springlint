@@ -7,7 +7,7 @@ import java.util.Set;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.ITypeBinding;
-import org.eclipse.jdt.core.dom.SimpleType;
+import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 public class ClassInfoVisitor extends ASTVisitor {
@@ -36,7 +36,7 @@ public class ClassInfoVisitor extends ASTVisitor {
 	private void getInterfaces(TypeDeclaration node) {
 		if(node.superInterfaceTypes()!=null) {
 			for(Object o : node.superInterfaceTypes()) {
-				String interfaceName = ((SimpleType)o).resolveBinding().getQualifiedName();
+				String interfaceName = ((Type)o).resolveBinding().getBinaryName();
 				interfaces.add(interfaceName);
 			}
 		}
@@ -44,7 +44,7 @@ public class ClassInfoVisitor extends ASTVisitor {
 
 	private void getSuperclass(TypeDeclaration node) {
 		if(node.getSuperclassType()!=null) {
-			superclass = node.getSuperclassType().resolveBinding().getQualifiedName();
+			superclass = node.getSuperclassType().resolveBinding().getBinaryName();
 		}
 	}
 
