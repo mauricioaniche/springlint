@@ -9,17 +9,12 @@
         </layout>
     </appender>
 
-    <category name="br.com.metricminer2">
-        <priority value="INFO"/>
-        <appender-ref ref="main"/>
-    </category>
-
     <category name="br.com.aniche">
         <priority value="INFO"/>
         <appender-ref ref="main"/>
     </category>
 
-    <category name="icsme2016">
+    <category name="org.smellycat">
         <priority value="INFO"/>
         <appender-ref ref="main"/>
     </category>
