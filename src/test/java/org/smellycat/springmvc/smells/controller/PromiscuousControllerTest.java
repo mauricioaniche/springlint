@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.smellycat.springmvc.SmellyCat;
+import org.smellycat.springmvc.SmellAnalysis;
 import org.smellycat.springmvc.domain.SmellyClass;
 import org.smellycat.springmvc.smells.SmellTest;
 
@@ -12,8 +12,8 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldCountNumberOfRoutes() throws UnsupportedEncodingException {
-		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t1", ps, repo);
-		tool.execute();
+		SmellAnalysis tool = new SmellAnalysis(basePath + "promiscuous-controller/t1", ps, repo);
+		tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceController");
 		Assert.assertEquals(2, sc.getAttribute("number-of-routes"));
@@ -21,8 +21,8 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldCountNumberOfServices() throws UnsupportedEncodingException {
-		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t1", ps, repo);
-		tool.execute();
+		SmellAnalysis tool = new SmellAnalysis(basePath + "promiscuous-controller/t1", ps, repo);
+		tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceController");
 		Assert.assertEquals(2, sc.getAttribute("number-of-services-as-dependencies"));
@@ -36,8 +36,8 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldDetectTheSmells() throws UnsupportedEncodingException {
-		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t2", ps, repo);
-		tool.execute();
+		SmellAnalysis tool = new SmellAnalysis(basePath + "promiscuous-controller/t1", ps, repo);
+		tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t2.InvoiceController");
 		Assert.assertTrue(sc.hasSmell("Promiscuous Controller"));
@@ -48,8 +48,8 @@ public class PromiscuousControllerTest extends SmellTest {
 
 	@Test
 	public void shouldUnderstandServiceInterfaces() throws UnsupportedEncodingException {
-		SmellyCat tool = new SmellyCat(basePath + "promiscuous-controller/t3", ps, repo);
-		tool.execute();
+		SmellAnalysis tool = new SmellAnalysis(basePath + "promiscuous-controller/t1", ps, repo);
+		tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t3.InvoiceController");
 		Assert.assertEquals(1, sc.getAttribute("number-of-services-as-dependencies"));

@@ -3,86 +3,75 @@ package org.smellycat.springmvc;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.log4j.Logger;
-import org.smellycat.springmvc.ar.ArchitecturalRoleRequestor;
 import org.smellycat.springmvc.domain.Repository;
-import org.smellycat.springmvc.domain.SmellyClass;
-import org.smellycat.springmvc.smells.SmellsRequestor;
-import org.smellycat.springmvc.smells.controller.PromiscuousController;
 
 public class SmellyCat {
 	
 	private static Logger log = Logger.getLogger(SmellyCat.class);
-	private PrintStream output;
 
-	private Repository repo;
-
-	private Parser parser;
-	private String projectPath;
-
-	public static void main(String[] args) throws FileNotFoundException {
-//		String projectPath = "/Users/mauricioaniche/Desktop/projects/SSP";
-//		String outputPath = "/Users/mauricioaniche/Desktop/projects/tool.csv";
+	public static void main(String[] args) throws FileNotFoundException, ParseException {
+		Options opts = new Options();
+		opts.addOption("arch", true, "Architecture ('springmvc', 'android')");
+		opts.addOption("o", "output", true, "Path to the output. It should end with '.html'");
+		opts.addOption("p", "project", true, "Path to the project");
+		opts.addOption("a", "analysis", true, "Type of the analysis ('ck', 'smell')");
 		
-		if(args.length!=2) {
-			System.out.println("Usage: java -jar smellycat.jar /dir/to/the/project /dir/to/the/output/file.csv");
+		CommandLineParser parser = new DefaultParser();
+		CommandLine cmd = parser.parse(opts, args);
+		
+		boolean missingArgument = 
+				!cmd.hasOption("arch") || 
+				!cmd.hasOption("output") || 
+				!cmd.hasOption("project") || 
+				!cmd.hasOption("analysis");
+
+		if(missingArgument) {
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.printHelp("smellycat", opts);
 			System.exit(-1);
 		}
 		
-		String projectPath = args[0];
-		String outputPath = args[1];
+		boolean invalidParams = 
+				(!cmd.getOptionValue("analysis").equals("ck") && !cmd.getOptionValue("analysis").equals("smell")) ||
+				(!cmd.getOptionValue("arch").equals("springmvc") && !cmd.getOptionValue("analysis").equals("android"));
 
+		if(invalidParams) {
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.printHelp("smellycat", opts);
+			System.exit(-1);
+		}
+		
+		String analysis = cmd.getOptionValue("analysis");
+		String projectPath = cmd.getOptionValue("project");
+		String outputPath = cmd.getOptionValue("output");
 		PrintStream output = new PrintStream(outputPath);
-		Repository repo = new Repository();
-		new SmellyCat(projectPath, output, repo).execute();
-		output.close();
-	}
-	
-	public SmellyCat(String projectPath, PrintStream output, Repository repo) {
-		this.projectPath = projectPath;
-		this.output = output;
-		this.repo = repo;
-	}
-	
-	public void execute() {
+		
 		long startTime = System.currentTimeMillis();
-		log.info("# ----------------------------- #");
-		log.info("#    Smelly Cat - Spring MVC    #");
-		log.info("# ----------------------------- #");
-
-		log.info("Starting the parse engine");
-		parser = new Parser(projectPath);
+		log.info("# ----------------------------------------- #");
+		log.info("#          Smelly Cat - Spring MVC          #");
+		log.info("#  www.github.com/mauricioaniche/smellycat  #");
+		log.info("# ----------------------------------------- #");
+		if(analysis.equals("ck")) {
+			new CKAnalysis(projectPath, output).run();
+		}
+		if(analysis.equals("smell")) {
+			Repository repo = new Repository();
+			new SmellAnalysis(projectPath, output, repo).run();
+		}
 		
-		identifyRoles();
-		searchSmells();
-		printAttributes();
-		
+		output.close();
 		long endTime = System.currentTimeMillis();
 		long time = (endTime - startTime) / 1000;
 		log.info(String.format("That's it! It only took %d seconds", time));
-	}
 
-	private void printAttributes() {
-		log.info("Saving the results...");
-		for(SmellyClass clazz : repo.all()) {
-			output.println(
-				clazz.getFile() + "," +
-				clazz.getName() + "," +
-				clazz.getRole() + "," +
-				clazz.getAttribute("number-of-routes") + "," +
-				clazz.getAttribute("number-of-services-as-dependencies")
-			);
-		}
-	}
 
-	private void searchSmells() {
-		log.info("Identifying smells...");
-		parser.execute(new SmellsRequestor(repo, new PromiscuousController()));
 	}
-
-	private void identifyRoles() {
-		log.info("Identifying roles...");
-		parser.execute(new ArchitecturalRoleRequestor(repo));
-	}
-
+	
 }

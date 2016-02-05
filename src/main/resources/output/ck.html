@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Smelly Cat report</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
+
+	<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/heatmap.js"></script>
+	<script src="https://code.highcharts.com/modules/treemap.js"></script>
+
+	<style type="text/css">
+		html{
+			background-color: #eaf0f2;
+		}
+
+		.header-basic-light{
+			padding: 20px 40px;
+			box-sizing:border-box;
+			box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
+			height: 80px;
+			background-color: #fff;
+		}
+		
+		.header-basic-light .header-limiter {
+			max-width: 1200px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		
+		/* Logo */
+		
+		.header-basic-light .header-limiter h1{
+			float: left;
+			font: normal 28px Cookie, Arial, Helvetica, sans-serif;
+			line-height: 40px;
+			margin: 0;
+		}
+		
+		.header-basic-light .header-limiter h1 span {
+			color: #5383d3;
+		}
+		
+		/* The header links */
+		
+		.header-basic-light .header-limiter a {
+			color: #5c616a;
+			text-decoration: none;
+		}
+		
+		.header-basic-light .header-limiter nav{
+			font:15px Arial, Helvetica, sans-serif;
+			line-height: 40px;
+			float: right;
+		}
+		
+		.header-basic-light .header-limiter nav a{
+			display: inline-block;
+			padding: 0 5px;
+			opacity: 0.9;
+			text-decoration:none;
+			color: #5c616a;
+			line-height:1;
+		}
+		
+		.header-basic-light .header-limiter nav {
+			cursor: pointer;
+		}
+		
+		.header-basic-light .header-limiter #nav-role a.selected {
+			background-color: #86a3d5;
+			color: #ffffff;
+			border-radius: 3px;
+			padding:6px 10px;
+		}
+		
+		.header-basic-light .header-limiter #nav-metric a.selected {
+			background-color: #33ccff;
+			color: #ffffff;
+			border-radius: 3px;
+			padding:6px 10px;
+		}
+		
+		/* Making the header responsive. */
+		
+		@media all and (max-width: 600px) {
+		
+			.header-basic-light {
+				padding: 20px 0;
+				height: 85px;
+			}
+		
+			.header-basic-light .header-limiter h1 {
+				float: none;
+				margin: -8px 0 10px;
+				text-align: center;
+				font-size: 24px;
+				line-height: 1;
+			}
+		
+			.header-basic-light .header-limiter nav {
+				line-height: 1;
+				float:none;
+			}
+		
+			.header-basic-light .header-limiter nav a {
+				font-size: 13px;
+			}
+		
+		}
+		
+		/* For the headers to look good, be sure to reset the margin and padding of the body */
+		
+		body {
+			margin:0;
+			padding:0;
+		}
+
+		#container {
+		    min-width: 700px;
+		    max-width: 700px;
+		    margin: 0 auto;
+		}
+
+		.content {
+			margin: 20px;
+		}
+
+		footer {
+			font-family: Arial;
+			font-size: 0.8em;
+			text-align: center;
+		}
+
+
+	</style>
+</head>
+
+<body>
+
+	<header class="header-basic-light">
+
+		<div class="header-limiter">
+
+			<h1><a href="http://mauricioaniche.github.io/smellycat">Smelly<span>Cat</span></a></h1>
+
+			<nav id="nav-metric">
+				<a href="#" class="action-metric selected">cbo</a>
+				<a href="#" class="action-metric">wmc</a>
+				<a href="#" class="action-metric">rfc</a>
+				<a href="#" class="action-metric">nom</a>
+				<a href="#" class="action-metric">lcom</a>
+			</nav>
+			<nav id="nav-role">
+				<a class="action-role selected">controller</a>
+				<a class="action-role">entity</a>
+				<a class="action-role">service</a>
+				<a class="action-role">repository</a>
+				<a class="action-role">component</a>
+			</nav>
+		</div>
+
+	</header>
+
+	<div class="content">
+		<div id="container"></div>
+	</div>
+
+	<footer>
+		<div>
+		Generated in ##date##
+		</div>
+	</footer>
+
+</body>
+
+
+<script>
+
+
+var thresholds = {
+	controller: {
+		 cbo: [26,29,34],
+		lcom: [33,95,435],
+		 nom: [16,22,37],
+		 rfc: [62,78,110],
+		 wmc: [57,83,130]
+	},
+	repository: {
+		 cbo: [15,21,31],
+		lcom: [36,106,351],
+		 nom: [19,26,41],
+		 rfc: [50,76,123],
+		 wmc: [60,104,212]
+	},
+	service: {
+		 cbo: [27,34,47],
+		lcom: [133,271,622],
+		 nom: [23,32,45],
+		 rfc: [88,123,190],
+		 wmc: [97,146,229]
+	},
+	entity: {
+		 cbo: [16,20,25],
+		lcom: [440,727,1844],
+		 nom: [33,42,64],
+		 rfc: [8,12,25],
+		 wmc: [49,61,88]
+	},
+	component: {
+		 cbo: [20,25,36],
+		lcom: [50,123,433],
+		 nom: [15,22,35],
+		 rfc: [56,81,132],
+		 wmc: [52,79,125]
+	}
+};
+
+var classes =
+##json##
+;
+
+function dataFrom(role, metric) {
+	var d = [];
+	for(i = 0; i < classes[role].length; i++) {
+		var item = classes[role][i];
+
+		d.push({
+			name: '',
+			fullName: item["className"],
+			value: item[metric],
+			colorValue: item[metric]
+		});
+	}
+
+	return d;
+}
+
+function filter(role, metric) {
+	plotChart(metric + " in " + role, thresholds[role][metric], dataFrom(role,metric));
+}
+
+function plotChart(title, thresholds, d) {
+
+	$('#container').highcharts({
+
+		tooltip: {
+			formatter: function() {
+				return this.point.fullName + ": " + this.point.value;
+			}
+		},
+		colorAxis: {
+			dataClassColor: 'category',
+			dataClasses: [{
+				to: thresholds[0],
+				name: 'low'
+			}, {
+				from: thresholds[0],
+				to: thresholds[1],
+				name: 'moderate'
+			}, {
+				from: thresholds[1],
+				to: thresholds[2],
+				name: 'high'
+			}, {
+				from: thresholds[2],
+				name: 'very high'
+			}]
+		},
+	  
+		colors: [
+			'rgba(10,255,10,1)', 
+			'rgba(255,204,0,1)', 
+			'rgba(255,71,71,1)', 
+			'rgba(153,0,0,1)'
+		],
+		                
+	    series: [{
+	        type: 'treemap',
+	        layoutAlgorithm: 'squarified',
+	        data: d
+	    }],
+	    title: {
+	        text: title
+	    },
+	    chart: {
+	    	backgroundColor: 'rgba(255,255,255,0.002)'
+	    }
+	});
+}
+
+
+function action() {
+	var role = $("#nav-role").find(".selected").html();
+	var metric = $("#nav-metric").find(".selected").html();
+
+	console.log(role + " " + metric);
+	filter(role,metric);
+}
+
+$(function() {
+	action();
+
+	$(".action-metric").click(function() {
+		$("#nav-metric").find(".selected").removeClass("selected");
+		$(this).addClass("selected");
+
+		action();
+	});
+
+	$(".action-role").click(function() {
+		$("#nav-role").find(".selected").removeClass("selected");
+		$(this).addClass("selected");
+
+		action();
+	});
+
+});
+</script>
+</html>
