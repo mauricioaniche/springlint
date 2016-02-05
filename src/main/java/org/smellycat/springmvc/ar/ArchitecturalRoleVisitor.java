@@ -5,12 +5,17 @@ import java.util.Set;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.Annotation;
+import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.MarkerAnnotation;
 import org.eclipse.jdt.core.dom.NormalAnnotation;
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.smellycat.springmvc.domain.ArchitecturalRole;
 
-public class ArchitecturalRoleVisitor extends ASTVisitor {
+import br.com.aniche.ck.CKNumber;
+import br.com.aniche.ck.CKReport;
+import br.com.aniche.ck.metric.Metric;
+
+public class ArchitecturalRoleVisitor extends ASTVisitor implements Metric {
 
 	private Set<String> allAnnotations;
 	
@@ -51,5 +56,15 @@ public class ArchitecturalRoleVisitor extends ASTVisitor {
 		}
 		
 		return ArchitecturalRole.UNINDENTIFIED;
+	}
+
+	@Override
+	public void execute(CompilationUnit cu, CKReport report) {
+		cu.accept(this);
+	}
+
+	@Override
+	public void setResult(CKNumber result) {
+		result.addSpecific("role", getRole().ordinal());
 	}
 }
