@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/heatmap.js"></script>
+	<script src="https://code.highcharts.com/modules/treemap.js"></script>
+
+	<style type="text/css">
+		#container {
+		    min-width: 700px;
+		    max-width: 700px;
+		    margin: 0 auto;
+		}
+	</style>
+</head>
+
+
+
+<body>
+
+	<div id="container"></div>
+
+</body>
+
+
+<script>
+
+var cbo_thresholds = [20,30,40];
+var cbo = 
+`A,75
+B,15
+C,4
+D,35`;
+
+function plotChart(title, thresholds, csvData) {
+
+	var lines = csvData.split("\n");
+	var d = [];
+	for(i = 0; i < lines.length; i++) {
+		line = lines[i].split(",")
+		d.push({
+			name: line[0],
+			value: parseInt(line[1]),
+			colorValue: parseInt(line[1])
+		});
+	}
+
+	$('#container').highcharts({
+		colorAxis: {
+			dataClassColor: 'category',
+			dataClasses: [{
+				to: thresholds[0],
+				name: 'low'
+			}, {
+				from: thresholds[0],
+				to: thresholds[1],
+				name: 'moderate'
+			}, {
+				from: thresholds[1],
+				to: thresholds[2],
+				name: 'high'
+			}, {
+				from: thresholds[2],
+				name: 'very high'
+			}]
+		},
+	  
+		colors: [
+			'rgba(10,255,10,1)', 
+			'rgba(255,204,0,1)', 
+			'rgba(255,71,71,1)', 
+			'rgba(153,0,0,1)'
+		],
+		                
+	    series: [{
+	        type: 'treemap',
+	        layoutAlgorithm: 'squarified',
+	        data: d
+	    }],
+	    title: {
+	        text: title
+	    }
+	});
+}
+
+
+$(function() {
+	plotChart('Coupling', cbo_thresholds, cbo);
+});
+</script>
+</html>
