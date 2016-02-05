@@ -12,6 +12,8 @@ and `Fragment`.
 Examples of the analysis: [CK in SSP (Spring MVC)](http://mauricioaniche.github.io/smellycat/ssp.html),
 [CK in AnyMemo (Android)](http://mauricioaniche.github.io/smellycat/anymemo.html).
 
+**Currently, only CK mode is working. We are still working on smell analysis.**
+
 # Analysis
 
 ## CK metrics
