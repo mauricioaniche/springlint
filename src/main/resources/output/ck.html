@@ -149,21 +149,17 @@
 
 		<div class="header-limiter">
 
-			<h1><a href="http://mauricioaniche.github.io/smellycat">Smelly<span>Cat</span></a></h1>
+			<h1><a href="http://www.github.com/mauricioaniche/smellycat">Smelly<span>Cat</span></a></h1>
 
 			<nav id="nav-metric">
-				<a href="#" class="action-metric selected">cbo</a>
-				<a href="#" class="action-metric">wmc</a>
-				<a href="#" class="action-metric">rfc</a>
-				<a href="#" class="action-metric">nom</a>
-				<a href="#" class="action-metric">lcom</a>
+				<a class="action-metric selected">cbo</a>
+				<a class="action-metric">wmc</a>
+				<a class="action-metric">rfc</a>
+				<a class="action-metric">nom</a>
+				<a class="action-metric">lcom</a>
 			</nav>
 			<nav id="nav-role">
-				<a class="action-role selected">controller</a>
-				<a class="action-role">entity</a>
-				<a class="action-role">service</a>
-				<a class="action-role">repository</a>
-				<a class="action-role">component</a>
+
 			</nav>
 		</div>
 
@@ -175,6 +171,7 @@
 
 	<footer>
 		<div>
+		Project dir: ##projectDir##<br/>
 		Generated in ##date##
 		</div>
 	</footer>
@@ -184,44 +181,7 @@
 
 <script>
 
-
-var thresholds = {
-	controller: {
-		 cbo: [26,29,34],
-		lcom: [33,95,435],
-		 nom: [16,22,37],
-		 rfc: [62,78,110],
-		 wmc: [57,83,130]
-	},
-	repository: {
-		 cbo: [15,21,31],
-		lcom: [36,106,351],
-		 nom: [19,26,41],
-		 rfc: [50,76,123],
-		 wmc: [60,104,212]
-	},
-	service: {
-		 cbo: [27,34,47],
-		lcom: [133,271,622],
-		 nom: [23,32,45],
-		 rfc: [88,123,190],
-		 wmc: [97,146,229]
-	},
-	entity: {
-		 cbo: [16,20,25],
-		lcom: [440,727,1844],
-		 nom: [33,42,64],
-		 rfc: [8,12,25],
-		 wmc: [49,61,88]
-	},
-	component: {
-		 cbo: [20,25,36],
-		lcom: [50,123,433],
-		 nom: [15,22,35],
-		 rfc: [56,81,132],
-		 wmc: [52,79,125]
-	}
-};
+##arch##
 
 var classes =
 ##json##
@@ -305,7 +265,15 @@ function action() {
 	filter(role,metric);
 }
 
+
+function menu() {
+	for(i = 0; i < roles.length; i++) {
+		$("#nav-role").append("<a class=\"action-role " + (i==0?"selected":"") +"\">" + roles[i] + "</a>");
+	}
+}
+
 $(function() {
+	menu();
 	action();
 
 	$(".action-metric").click(function() {
