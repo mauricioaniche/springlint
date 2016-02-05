@@ -25,11 +25,11 @@ public class AndroidArchitecturalRoleVisitor extends ArchitecturalRoleVisitor {
 	
 	public ArchitecturalRole getRole() {
 		
-		if(superclass==null) return ArchitecturalRole.UNINDENTIFIED;
+		if(superclass==null) return ArchitecturalRole.OTHER;
 		if(superclass.contains("AsyncTask")) return AndroidArchitecture.TASK;
 		if(superclass.endsWith("Activity")) return AndroidArchitecture.ACTIVITY;
 		if(superclass.endsWith("Fragment")) return AndroidArchitecture.FRAGMENT;
-		return ArchitecturalRole.UNINDENTIFIED;
+		return ArchitecturalRole.OTHER;
 	}
 
 	@Override

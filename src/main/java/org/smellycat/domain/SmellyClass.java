@@ -25,7 +25,7 @@ public class SmellyClass {
 		this.interfaces = interfaces;
 		this.smells = new HashMap<String, String>();
 		this.attributes = new HashMap<String, Integer>();
-		this.role = ArchitecturalRole.UNINDENTIFIED;
+		this.role = ArchitecturalRole.OTHER;
 	}
 	
 	public String getFile() {

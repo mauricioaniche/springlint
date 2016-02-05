@@ -54,7 +54,7 @@ public class SpringMVCArchitecturalRoleVisitor extends ArchitecturalRoleVisitor 
 			if(ann.endsWith("Component")) return SpringMVCArchitecture.COMPONENT;
 		}
 		
-		return ArchitecturalRole.UNINDENTIFIED;
+		return ArchitecturalRole.OTHER;
 	}
 
 	@Override

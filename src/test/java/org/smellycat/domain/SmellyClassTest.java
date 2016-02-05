@@ -58,7 +58,7 @@ public class SmellyClassTest {
 
 	@Test
 	public void defineArchitecturalRole() {
-		Assert.assertTrue(sc.is(ArchitecturalRole.UNINDENTIFIED));
+		Assert.assertTrue(sc.is(ArchitecturalRole.OTHER));
 
 		sc.setRole(SpringMVCArchitecture.CONTROLLER);
 		Assert.assertTrue(sc.is(SpringMVCArchitecture.CONTROLLER));

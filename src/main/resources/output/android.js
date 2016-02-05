@@ -1,4 +1,4 @@
-var roles = ['activity','task','fragment'];
+var roles = ['activity','task','fragment','other'];
 var thresholds = {
 	activity: {
 		 cbo: [40,51,63],
@@ -20,5 +20,12 @@ var thresholds = {
 		 nom: [30,39,61],
 		 rfc: [98,123,170],
 		 wmc: [124,164,258]
+	},
+	other: {
+		 cbo: [23,31,48],
+		lcom: [414,988,3596],
+		 nom: [36,54,94],
+		 rfc: [75,106,168],
+		 wmc: [141,222,425]
 	}
 };

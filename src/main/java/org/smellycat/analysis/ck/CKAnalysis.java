@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class CKAnalysis {
 			.plug(() -> arch.roleVisitor())
 			.calculate(projectPath);
 		
-		for(ArchitecturalRole role : arch.roles()) {
+		for(ArchitecturalRole role : rolesPlusUnindentified()) {
 		
 			List<CKNumber> filtered = report.all().stream()
 				.filter(n -> n.getSpecific("role") == role.id())
@@ -52,6 +53,12 @@ public class CKAnalysis {
 		}
 		String json = new Gson().toJson(result);
 		generateOutput(json);
+	}
+
+	private List<ArchitecturalRole> rolesPlusUnindentified() {
+		List<ArchitecturalRole> roles = new ArrayList<>(arch.roles());
+		roles.add(ArchitecturalRole.OTHER);
+		return roles;
 	}
 
 	private void generateOutput(String json) {

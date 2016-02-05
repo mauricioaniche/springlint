@@ -70,6 +70,6 @@ public class SpringMVCArchitecturalRoleVisitorTest {
 		
 		new SingleClassJDTRunner().visit(visitor, new ByteArrayInputStream(sc.getBytes()));
 		
-		Assert.assertEquals(ArchitecturalRole.UNINDENTIFIED, visitor.getRole());
+		Assert.assertEquals(ArchitecturalRole.OTHER, visitor.getRole());
 	}
 }

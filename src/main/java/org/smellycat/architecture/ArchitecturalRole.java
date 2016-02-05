@@ -2,7 +2,7 @@ package org.smellycat.architecture;
 
 public class ArchitecturalRole {
 
-	public static ArchitecturalRole UNINDENTIFIED = new ArchitecturalRole(9999, "unindentified");
+	public static ArchitecturalRole OTHER = new ArchitecturalRole(9999, "other");
 	
 	private String name;
 	private int id;

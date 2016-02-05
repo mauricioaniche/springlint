@@ -1,4 +1,4 @@
-var roles = ['controller', 'repository', 'service', 'entity', 'component'];
+var roles = ['controller', 'repository', 'service', 'entity', 'component', 'other'];
 var thresholds = {
 	controller: {
 		 cbo: [26,29,34],
@@ -34,5 +34,12 @@ var thresholds = {
 		 nom: [15,22,35],
 		 rfc: [56,81,132],
 		 wmc: [52,79,125]
+	},
+	other: {
+		 cbo: [16,22,32],
+		lcom: [147,368,1307],
+		 nom: [23,34,59],
+		 rfc: [48,71,119],
+		 wmc: [65,101,187]
 	}
 };
