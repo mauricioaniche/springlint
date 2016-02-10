@@ -41,13 +41,19 @@ public class SmellAnalysis {
 
 	private void printAttributes() {
 		log.info("Saving the results...");
+		
+		output.println("file,name,role,routes,services,entities,sqlcomplexity,mccabe,springrfc");
 		for(SmellyClass clazz : repo.all()) {
 			output.println(
 				clazz.getFile() + "," +
 				clazz.getName() + "," +
 				clazz.getRole().name() + "," +
 				clazz.getAttribute("number-of-routes") + "," +
-				clazz.getAttribute("number-of-services-as-dependencies")
+				clazz.getAttribute("number-of-services-as-dependencies") + "," +
+				clazz.getAttribute("number-of-entities-as-dependencies") + "," +
+				clazz.getAttribute("sql-complexity") + "," +
+				clazz.getAttribute("mccabe") + "," +
+				clazz.getAttribute("rfc-but-spring")
 			);
 		}
 	}
