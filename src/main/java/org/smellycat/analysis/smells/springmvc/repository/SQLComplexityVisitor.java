@@ -8,7 +8,7 @@ import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.StringLiteral;
 import org.smellycat.domain.SmellyClass;
 
-public class SQLComplexity extends ASTVisitor {
+public class SQLComplexityVisitor extends ASTVisitor {
 
 	private SmellyClass clazz;
 	private int complexity;
@@ -25,7 +25,7 @@ public class SQLComplexity extends ASTVisitor {
 		complexityKeywords.add("from");
 	}
 
-	public SQLComplexity(SmellyClass clazz) {
+	public SQLComplexityVisitor(SmellyClass clazz) {
 		this.clazz = clazz;
 		this.complexity = 0;
 	}

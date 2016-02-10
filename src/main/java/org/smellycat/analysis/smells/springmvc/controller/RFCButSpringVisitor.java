@@ -13,7 +13,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.smellycat.domain.SmellyClass;
 
-public class RFCButSpring extends ASTVisitor {
+public class RFCButSpringVisitor extends ASTVisitor {
 
 	private HashSet<String> methodInvocations = new HashSet<String>();
 	
@@ -23,7 +23,7 @@ public class RFCButSpring extends ASTVisitor {
 	
 	private SmellyClass clazz;
 
-	public RFCButSpring(SmellyClass clazz) {
+	public RFCButSpringVisitor(SmellyClass clazz) {
 		this.clazz = clazz;
 		this.localVariables = new HashMap<String, String>();
 		this.fieldVariables = new HashMap<String, String>();

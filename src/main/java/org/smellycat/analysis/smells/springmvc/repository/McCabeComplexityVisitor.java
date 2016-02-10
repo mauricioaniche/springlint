@@ -4,11 +4,11 @@ import org.smellycat.domain.SmellyClass;
 
 import br.com.aniche.ck.metric.WMC;
 
-public class McCabeComplexity extends WMC {
+public class McCabeComplexityVisitor extends WMC {
 
 	private SmellyClass clazz;
 
-	public McCabeComplexity(SmellyClass clazz) {
+	public McCabeComplexityVisitor(SmellyClass clazz) {
 		this.clazz = clazz;
 	}
 	
