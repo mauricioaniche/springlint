@@ -31,7 +31,9 @@ public class RFCButSpringVisitor extends ASTVisitor {
 	}
 
 	public boolean visit(MethodInvocation node) {
-		if(!belongsToSpring(node)) {
+		System.out.println("mi " + node);
+		boolean wasInvokedInADependency = node.getExpression()!=null;
+		if(wasInvokedInADependency && !belongsToSpring(node)) {
 			methodInvocations.add(node.getName()  + "/" + node.arguments().size());
 		}
 		

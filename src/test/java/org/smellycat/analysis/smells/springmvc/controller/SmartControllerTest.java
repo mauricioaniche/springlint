@@ -1,7 +1,5 @@
 package org.smellycat.analysis.smells.springmvc.controller;
 
-import java.io.UnsupportedEncodingException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +18,7 @@ public class SmartControllerTest extends SmellTest {
 	}
 	
 	@Test
-	public void ignoreSpringMethodInvocations() throws UnsupportedEncodingException {
+	public void ignoreSpringMethodInvocations()  {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-controller/t1", ps, repo);
 		tool.run();
 		
@@ -29,7 +27,7 @@ public class SmartControllerTest extends SmellTest {
 	}
 
 	@Test
-	public void countOtherInvocations() throws UnsupportedEncodingException {
+	public void countOtherInvocations()  {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-controller/t1", ps, repo);
 		tool.run();
 		
@@ -41,7 +39,7 @@ public class SmartControllerTest extends SmellTest {
 	}
 
 	@Test
-	public void countStaticInvocations() throws UnsupportedEncodingException {
+	public void countStaticInvocations()  {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-controller/t1", ps, repo);
 		tool.run();
 		
@@ -50,11 +48,20 @@ public class SmartControllerTest extends SmellTest {
 	}
 
 	@Test
-	public void shouldDealWithInlineMultipleVariableDeclaration() throws UnsupportedEncodingException {
+	public void shouldDealWithInlineMultipleVariableDeclaration() {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-controller/t1", ps, repo);
 		tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceController6");
+		Assert.assertEquals(1, sc.getAttribute("rfc-but-spring"));
+	}
+
+	@Test
+	public void shouldIgnoreInternalMethods()  {
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-controller/t2", ps, repo);
+		tool.run();
+		
+		SmellyClass sc = repo.getByClass("mfa.t2.MyController");
 		Assert.assertEquals(1, sc.getAttribute("rfc-but-spring"));
 	}
 

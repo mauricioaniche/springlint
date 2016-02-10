@@ -10,7 +10,7 @@ import org.smellycat.analysis.smells.SmellTest;
 import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.SmellyClass;
 
-public class SmartControllerTest extends SmellTest {
+public class SmartRepositoryTest extends SmellTest {
 
 	private SpringMVCArchitecture arch;
 
