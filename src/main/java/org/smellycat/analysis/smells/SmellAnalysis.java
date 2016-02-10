@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import org.apache.log4j.Logger;
 import org.smellycat.analysis.smells.springmvc.controller.PromiscuousController;
+import org.smellycat.analysis.smells.springmvc.controller.SmartController;
 import org.smellycat.architecture.Architecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
@@ -42,7 +43,7 @@ public class SmellAnalysis {
 			output.println(
 				clazz.getFile() + "," +
 				clazz.getName() + "," +
-				clazz.getRole() + "," +
+				clazz.getRole().name() + "," +
 				clazz.getAttribute("number-of-routes") + "," +
 				clazz.getAttribute("number-of-services-as-dependencies")
 			);
@@ -51,12 +52,12 @@ public class SmellAnalysis {
 
 	private void searchSmells() {
 		log.info("Identifying smells...");
-		parser.execute(new SmellsRequestor(repo, new PromiscuousController()));
+		parser.execute(new SmellsRequestor(repo, 
+			new PromiscuousController(), new SmartController()));
 	}
 
 	private void identifyRoles() {
 		log.info("Identifying roles...");
-		// TODO: android here too
 		parser.execute(new ArchitecturalRoleRequestor(arch, repo));
 	}	
 	

@@ -40,13 +40,13 @@ public class SmellyClassTest {
 	}
 	
 	@Test
-	public void return0IfAttributeIsNotFound() {
-		Assert.assertEquals(0, sc.getAttribute("attr3"));
+	public void returnNegative1IfAttributeIsNotFound() {
+		Assert.assertEquals(-1, sc.getAttribute("attr3"));
 	}
 
 	@Test
 	public void plusOneToAttribute() {
-		Assert.assertEquals(0, sc.getAttribute("attr3"));
+		Assert.assertEquals(-1, sc.getAttribute("attr3"));
 
 		sc.plusOne("attr3");
 		Assert.assertEquals(1, sc.getAttribute("attr3"));

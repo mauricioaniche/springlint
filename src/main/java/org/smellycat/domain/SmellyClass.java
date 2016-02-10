@@ -57,7 +57,7 @@ public class SmellyClass {
 	}
 	
 	public int getAttribute(String attribute) {
-		if(!attributes.containsKey(attribute)) return 0;
+		if(!attributes.containsKey(attribute)) return -1;
 		return attributes.get(attribute);
 	}
 
@@ -66,6 +66,9 @@ public class SmellyClass {
 	}
 
 	public void plusOne(String attribute) {
+		if(getAttribute(attribute)==-1)
+			setAttribute(attribute, 0);
+		
 		setAttribute(attribute, getAttribute(attribute)+1);
 	}
 
