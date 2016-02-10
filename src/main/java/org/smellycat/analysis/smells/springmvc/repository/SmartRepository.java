@@ -1,4 +1,4 @@
-package org.smellycat.analysis.smells.springmvc.controller;
+package org.smellycat.analysis.smells.springmvc.repository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,12 +9,12 @@ import org.smellycat.analysis.smells.Smell;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
-public class SmartController implements Smell {
+public class SmartRepository implements Smell {
 
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
 		return Arrays.asList(
-			() -> new RFCButSpring(clazz)
+			() -> new SQLComplexity(clazz)
 		);
 	}
 
