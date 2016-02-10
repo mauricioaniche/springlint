@@ -2,6 +2,7 @@ package org.smellycat.analysis.smells;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
@@ -63,10 +64,8 @@ public class ArchitecturalRoleDependenciesCountVisitor extends ASTVisitor {
 	}
 
 	private SmellyClass findRole(List<SmellyClass> subtypes) {
-		for(SmellyClass subtype : subtypes) {
-			if(subtype.is(ar)) return subtype;
-		}
-		return null;
+		Optional<SmellyClass> sc = subtypes.stream().filter(s -> s.is(ar)).findFirst();
+		return sc.orElse(null);
 	}
 
 }
