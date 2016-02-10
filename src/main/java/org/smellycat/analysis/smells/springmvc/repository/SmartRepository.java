@@ -14,7 +14,8 @@ public class SmartRepository implements Smell {
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
 		return Arrays.asList(
-			() -> new SQLComplexity(clazz)
+			() -> new SQLComplexity(clazz),
+			() -> new McCabeComplexity(clazz)
 		);
 	}
 
