@@ -28,16 +28,21 @@ public class SQLComplexityVisitor extends ASTVisitor {
 	public SQLComplexityVisitor(SmellyClass clazz) {
 		this.clazz = clazz;
 		this.complexity = 0;
+		update();
 	}
 	
 	public boolean visit(StringLiteral node) {
 		String sql = node.getLiteralValue();
 		if(isSql(sql)) {
 			calculateComplexity(sql);
-			clazz.setAttribute("sql-complexity", complexity);
+			update();
 		}
 		
 		return super.visit(node);
+	}
+
+	private void update() {
+		clazz.setAttribute("sql-complexity", complexity);
 	}
 
 	private void calculateComplexity(String sql) {

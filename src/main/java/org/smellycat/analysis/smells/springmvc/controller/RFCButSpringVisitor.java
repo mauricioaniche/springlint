@@ -15,7 +15,7 @@ import org.smellycat.domain.SmellyClass;
 
 public class RFCButSpringVisitor extends ASTVisitor {
 
-	private HashSet<String> methodInvocations = new HashSet<String>();
+	private HashSet<String> methodInvocations;
 	
 	private Map<String, String> localVariables;
 	private Map<String, String> fieldVariables;
@@ -28,6 +28,13 @@ public class RFCButSpringVisitor extends ASTVisitor {
 		this.localVariables = new HashMap<String, String>();
 		this.fieldVariables = new HashMap<String, String>();
 		this.importList = new HashMap<String, String>();
+		this.methodInvocations = new HashSet<String>();
+		
+		update(clazz);
+	}
+
+	private void update(SmellyClass clazz) {
+		clazz.setAttribute("rfc-but-spring", methodInvocations.size());
 	}
 
 	public boolean visit(MethodInvocation node) {
@@ -36,7 +43,7 @@ public class RFCButSpringVisitor extends ASTVisitor {
 			methodInvocations.add(node.getName()  + "/" + node.arguments().size());
 		}
 		
-		clazz.setAttribute("rfc-but-spring", methodInvocations.size());
+		update(clazz);
 		
 		return super.visit(node);
 	}

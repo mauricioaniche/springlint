@@ -10,11 +10,16 @@ public class McCabeComplexityVisitor extends WMC {
 
 	public McCabeComplexityVisitor(SmellyClass clazz) {
 		this.clazz = clazz;
+		update();
 	}
 	
 	@Override
 	protected void increaseCc(int qtd) {
 		super.increaseCc(qtd);
+		update();
+	}
+
+	private void update() {
 		clazz.setAttribute("mccabe", cc);
 	}
 	
