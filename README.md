@@ -14,6 +14,19 @@ Examples of the analysis: [CK in SSP (Spring MVC)](http://mauricioaniche.github.
 
 **Currently, only CK mode is working. We are still working on smell analysis.**
 
+# How to interpret?
+
+SmellyCat produces a treemap. It means that the higher the class' square,
+the higher the metric value. However, it classifies the value in 4
+categories. Green means that your class is below any risk limit. It means
+that, to the point of view of that metric, you should not be worried.
+Yellow means moderate risk. It means that you should start taking
+care of it. Light red means high risk, and dark red means
+very high risk. These are the classes you should be worried about, as
+they are very far from what we consider "good".
+
+You can see the specific thresholds values in our paper.
+
 # Analysis
 
 ## CK metrics
