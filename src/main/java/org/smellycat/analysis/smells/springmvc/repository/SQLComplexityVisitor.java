@@ -23,6 +23,11 @@ public class SQLComplexityVisitor extends ASTVisitor {
 		complexityKeywords.add("exists");
 		complexityKeywords.add("not");
 		complexityKeywords.add("from");
+		complexityKeywords.add("xor");
+		complexityKeywords.add("if");
+		complexityKeywords.add("else");
+		complexityKeywords.add("case");
+		complexityKeywords.add("in");
 	}
 
 	public SQLComplexityVisitor(SmellyClass clazz) {
