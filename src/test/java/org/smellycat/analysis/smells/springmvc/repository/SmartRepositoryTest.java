@@ -37,4 +37,13 @@ public class SmartRepositoryTest extends SmellTest {
 		Assert.assertEquals(12, sc.getAttribute("sql-complexity"));
 	}
 
+	@Test
+	public void understandInlineSql() throws UnsupportedEncodingException {
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1", ps, repo);
+		tool.run();
+		
+		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceRepository3");
+		Assert.assertEquals(3, sc.getAttribute("sql-complexity"));
+	}
+
 }
