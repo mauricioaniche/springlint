@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.hibernate.Session;
 
 @Repository
-public class InvoiceRepository2 {
+public class CorrectRepository {
 	
 	@Autowired
 	@PersistenceContext
@@ -14,13 +14,11 @@ public class InvoiceRepository2 {
 		String sql = "select * from" +
 					 "table where x = 1 and y = 1";
 
-		session.createQuery(sql).list();
+		session
+			.createQuery(sql).list();
 	}
 
 	public void m2() {
-		String sql = "select * FROM" +
-					 "table a join b on a.a = b.b where x = 1 and y = 1 and not exists () and bla in (1,2)";
-
-		session.createQuery(sql).list();
+		session.createQuery("update * from table").update();
 	}
 }

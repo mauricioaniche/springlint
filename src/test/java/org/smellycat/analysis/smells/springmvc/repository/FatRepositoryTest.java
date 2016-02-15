@@ -1,7 +1,5 @@
 package org.smellycat.analysis.smells.springmvc.repository;
 
-import java.io.UnsupportedEncodingException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +18,7 @@ public class FatRepositoryTest extends SmellTest {
 	}
 	
 	@Test
-	public void countNumberOfEntities() throws UnsupportedEncodingException {
+	public void countNumberOfEntities() {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "fat-repository/t1", ps, repo);
 		tool.run();
 		
@@ -29,7 +27,7 @@ public class FatRepositoryTest extends SmellTest {
 	}
 
 	@Test
-	public void countNumberOfEntitiesNoMatterThePackage() throws UnsupportedEncodingException {
+	public void countNumberOfEntitiesNoMatterThePackage() {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "fat-repository/t1", ps, repo);
 		tool.run();
 		
@@ -38,7 +36,7 @@ public class FatRepositoryTest extends SmellTest {
 	}
 
 	@Test
-	public void countNumberOfEntitiesInReturnType() throws UnsupportedEncodingException {
+	public void countNumberOfEntitiesInReturnType() {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "fat-repository/t1", ps, repo);
 		tool.run();
 		

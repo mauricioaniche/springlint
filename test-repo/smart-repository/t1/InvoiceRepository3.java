@@ -1,6 +1,7 @@
 package mfa.t1;
 
 import org.springframework.stereotype.Repository;
+import org.hibernate.Session;
 
 @Repository
 public class InvoiceRepository3 {

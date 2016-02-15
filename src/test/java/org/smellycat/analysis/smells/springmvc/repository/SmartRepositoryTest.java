@@ -1,7 +1,5 @@
 package org.smellycat.analysis.smells.springmvc.repository;
 
-import java.io.UnsupportedEncodingException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +18,7 @@ public class SmartRepositoryTest extends SmellTest {
 	}
 	
 	@Test
-	public void countKeywords() throws UnsupportedEncodingException {
+	public void countKeywords() {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1", ps, repo);
 		tool.run();
 		
@@ -29,7 +27,7 @@ public class SmartRepositoryTest extends SmellTest {
 	}
 
 	@Test
-	public void countKeywordsInAllMethods() throws UnsupportedEncodingException {
+	public void countKeywordsInAllMethods() {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1", ps, repo);
 		tool.run();
 		
@@ -38,7 +36,7 @@ public class SmartRepositoryTest extends SmellTest {
 	}
 
 	@Test
-	public void understandInlineSql() throws UnsupportedEncodingException {
+	public void understandInlineSql() {
 		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1", ps, repo);
 		tool.run();
 		
