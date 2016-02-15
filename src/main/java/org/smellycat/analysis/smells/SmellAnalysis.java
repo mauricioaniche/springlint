@@ -7,6 +7,7 @@ import org.smellycat.analysis.smells.springmvc.controller.PromiscuousController;
 import org.smellycat.analysis.smells.springmvc.controller.SmartController;
 import org.smellycat.analysis.smells.springmvc.repository.FatRepository;
 import org.smellycat.analysis.smells.springmvc.repository.SmartRepository;
+import org.smellycat.analysis.smells.springmvc.service.DBQueryingService;
 import org.smellycat.architecture.Architecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
@@ -42,7 +43,7 @@ public class SmellAnalysis {
 	private void printAttributes() {
 		log.info("Saving the results...");
 		
-		output.println("file,name,role,routes,services,entities,sqlcomplexity,mccabe,springrfc");
+		output.println("file,name,role,routes,services,entities,sqlcomplexity,mccabe,springrfc,persistence");
 		for(SmellyClass clazz : repo.all()) {
 			output.println(
 				clazz.getFile() + "," +
@@ -53,7 +54,8 @@ public class SmellAnalysis {
 				clazz.getAttribute("number-of-entities-as-dependencies") + "," +
 				clazz.getAttribute("sql-complexity") + "," +
 				clazz.getAttribute("mccabe") + "," +
-				clazz.getAttribute("rfc-but-spring")
+				clazz.getAttribute("rfc-but-spring") + "," +
+				clazz.getAttribute("use-persistence-mechanism")
 			);
 		}
 	}
@@ -62,7 +64,7 @@ public class SmellAnalysis {
 		// TODO: inject all smells automatically
 		log.info("Identifying smells...");
 		parser.execute(new SmellsRequestor(repo, 
-			new PromiscuousController(), new SmartController(), new SmartRepository(), new FatRepository()));
+			new PromiscuousController(), new SmartController(), new SmartRepository(), new FatRepository(), new DBQueryingService()));
 	}
 
 	private void identifyRoles() {

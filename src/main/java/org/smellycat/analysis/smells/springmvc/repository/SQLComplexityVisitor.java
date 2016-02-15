@@ -27,7 +27,8 @@ public class SQLComplexityVisitor extends ASTVisitor {
 		complexityKeywords.add("if");
 		complexityKeywords.add("else");
 		complexityKeywords.add("case");
-		complexityKeywords.add("in");
+
+		complexityKeywords.add(" in"); // there's a space so that it doesnt conflict with 'join'. better approach needed.
 	}
 
 	public SQLComplexityVisitor(SmellyClass clazz) {
@@ -52,6 +53,9 @@ public class SQLComplexityVisitor extends ASTVisitor {
 
 	private void calculateComplexity(String sql) {
 		sql = sql.toLowerCase();
+		sql = sql.replace("(", " ");
+		sql = sql.replace(")", " ");
+		
 		for(String keyword : complexityKeywords) {
 			complexity += StringUtils.countMatches(sql, keyword);
 		}

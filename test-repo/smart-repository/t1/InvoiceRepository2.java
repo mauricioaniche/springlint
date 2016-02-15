@@ -18,7 +18,7 @@ public class InvoiceRepository2 {
 
 	public void m2() {
 		String sql = "select * FROM" +
-					 "table a join b on a.a = b.b where x = 1 and y = 1 and not exists ()";
+					 "table a join b on a.a = b.b where x = 1 and y = 1 and not exists () and bla in (1,2)";
 
 		session.createQuery(sql).list();
 	}

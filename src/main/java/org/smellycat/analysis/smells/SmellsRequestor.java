@@ -42,7 +42,7 @@ public class SmellsRequestor extends FileASTRequestor {
 				if(foundASmell) log.info("-- SMELL DETECTED!");
 			}
 			
-		} catch(Exception e) {
+		} catch(Throwable e) {
 			// just ignore... sorry!
 			log.error("error in " + sourceFilePath, e);
 		}

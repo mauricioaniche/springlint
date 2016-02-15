@@ -34,7 +34,7 @@ public class SmartRepositoryTest extends SmellTest {
 		tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceRepository2");
-		Assert.assertEquals(10, sc.getAttribute("sql-complexity"));
+		Assert.assertEquals(12, sc.getAttribute("sql-complexity"));
 	}
 
 }
