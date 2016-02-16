@@ -44,9 +44,10 @@ public class SmellAnalysis {
 	private void printAttributes() {
 		log.info("Saving the results...");
 		
-		output.println("file,name,role,routes,services,entities,sqlcomplexity,mccabe,springrfc,persistence,persistinvocations");
+		output.println("project,file,name,role,routes,services,entities,sqlcomplexity,mccabe,springrfc,persistence,persistinvocations");
 		for(SmellyClass clazz : repo.all()) {
 			output.println(
+				projectPath + "," +
 				clazz.getFile() + "," +
 				clazz.getName() + "," +
 				clazz.getRole().name() + "," +
