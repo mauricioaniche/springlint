@@ -16,6 +16,9 @@ public class CorrectRepository {
 
 		session
 			.createQuery(sql).list();
+
+		String query = "";
+		query.toString();
 	}
 
 	public void m2() {

@@ -6,10 +6,13 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.smellycat.analysis.smells.Smell;
+import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
 public class SmartController implements Smell {
+
+	private static final int RFC_THRESHOLD = 64;
 
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
@@ -20,8 +23,16 @@ public class SmartController implements Smell {
 
 	@Override
 	public boolean conciliate(SmellyClass clazz) {
-		// TODO Auto-generated method stub
+		
+		int rfc = clazz.getAttribute("rfc-but-spring");
+		
+		boolean hasHighRfc = rfc >= RFC_THRESHOLD;
+		
+		if(clazz.is(SpringMVCArchitecture.CONTROLLER) && hasHighRfc) {
+			clazz.smells("Smart Controller", String.format("It has RFC=%d", rfc));
+			return true;
+		}
+		
 		return false;
 	}
-
 }

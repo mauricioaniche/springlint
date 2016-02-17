@@ -26,8 +26,8 @@ public class SmellyClassTest {
 		Assert.assertTrue(sc.hasSmell("Some Smell"));
 		Assert.assertTrue(sc.hasSmell("Some Other Smell"));
 		Assert.assertFalse(sc.hasSmell("Nooo"));
-		Assert.assertEquals("this class is smelly", sc.getExplanationFor("Some Smell"));
-		Assert.assertEquals("this class is also smelly", sc.getExplanationFor("Some Other Smell"));
+		Assert.assertEquals("this class is smelly", sc.getDescriptionFor("Some Smell"));
+		Assert.assertEquals("this class is also smelly", sc.getDescriptionFor("Some Other Smell"));
 	}
 
 	@Test

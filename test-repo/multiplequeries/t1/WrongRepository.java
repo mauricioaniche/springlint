@@ -18,6 +18,7 @@ public class WrongRepository {
 			.createQuery(sql).list();
 
 		session.createQuery("update * from table").update();
+
 	}
 
 	public void m2() {

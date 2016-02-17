@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.smellycat.analysis.smells.Smell;
+import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
@@ -17,11 +18,16 @@ public class DBQueryingService implements Smell {
 			() -> new UsePersistenceMechanismVisitor(clazz)
 		);
 	}
-
 	@Override
 	public boolean conciliate(SmellyClass clazz) {
-		// TODO Auto-generated method stub
+		
+		boolean doMultiplePersistenceInvocations = clazz.getAttribute("use-persistence-mechanism") == 1;
+		
+		if(clazz.is(SpringMVCArchitecture.SERVICE) && doMultiplePersistenceInvocations) {
+			clazz.smells("DB Querying service", String.format("It uses a persistence mechanism."));
+			return true;
+		}
+		
 		return false;
 	}
-
 }

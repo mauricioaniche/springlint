@@ -22,13 +22,20 @@ public class SmellAnalysis {
 	
 	private static Logger log = Logger.getLogger(SmellAnalysis.class);
 	private Architecture arch;
+	private boolean printSmells;
 
-	public SmellAnalysis(Architecture arch, String projectPath, PrintStream output, Repository repo) {
+	public SmellAnalysis(Architecture arch, String projectPath, PrintStream output, Repository repo, boolean printSmells) {
 		this.arch = arch;
 		this.projectPath = projectPath;
 		this.output = output;
 		this.repo = repo;
+		this.printSmells = printSmells;
 	}
+
+	public SmellAnalysis(Architecture arch, String projectPath, PrintStream output, Repository repo) {
+		this(arch, projectPath, output, repo, true);
+	}
+
 
 	public void run() {
 
@@ -37,8 +44,27 @@ public class SmellAnalysis {
 		
 		identifyRoles();
 		searchSmells();
-		printAttributes();
+		if(printSmells) printSmells();
+		else printAttributes();
 		
+	}
+
+	private void printSmells() {
+		log.info("Saving the results...");
+		
+		output.println("project,file,name,role,smell,note");
+		for(SmellyClass clazz : repo.all()) {
+			for(SmellDescription description : clazz.getSmells()) {
+				output.println(
+					projectPath + "," +
+					clazz.getFile() + "," +
+					clazz.getName() + "," +
+					clazz.getRole().name() + "," +
+					description.getName() + "," +
+					description.getDescription()
+				);
+			}
+		}		
 	}
 
 	private void printAttributes() {

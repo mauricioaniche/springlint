@@ -15,14 +15,15 @@ public class PersistenceAPIs {
 		
 		// spring data
 		persistenceApis.add("org.springframework.data");
-		persistenceMethods.add("query");
+		persistenceMethods.add(".query");
 
 		// hibernate
 		persistenceApis.add("org.hibernate");
-		persistenceMethods.add("createQuery");
-		persistenceMethods.add("createSQLQuery");
-		persistenceMethods.add("createFilter");
-		persistenceMethods.add("createNamedQuery");
+		persistenceMethods.add(".createQuery");
+		persistenceMethods.add(".createSQLQuery");
+		persistenceMethods.add(".createFilter");
+		persistenceMethods.add(".createNamedQuery");
+		persistenceMethods.add(".createCriteria");
 		
 		// jpa
 		persistenceApis.add("javax.persistence");
@@ -30,6 +31,7 @@ public class PersistenceAPIs {
 		persistenceMethods.add(".createNativeQuery");
 		persistenceMethods.add(".createQuery");
 		persistenceMethods.add(".createStoredProcedure");
+		persistenceMethods.add(".getCriteriaBuilder");
 		
 		// jdbc
 		persistenceApis.add("java.sql");

@@ -6,10 +6,13 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.smellycat.analysis.smells.Smell;
+import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
 public class FatRepository implements Smell {
+
+	private static final int ENTITY_THRESHOLD = 4;
 
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
@@ -20,8 +23,16 @@ public class FatRepository implements Smell {
 
 	@Override
 	public boolean conciliate(SmellyClass clazz) {
-		// TODO Auto-generated method stub
+		
+		int entities = clazz.getAttribute("number-of-entities-as-dependencies");
+		
+		boolean hasHighEntities = entities >= ENTITY_THRESHOLD;
+		
+		if(clazz.is(SpringMVCArchitecture.REPOSITORY) && hasHighEntities) {
+			clazz.smells("Fat Repository", String.format("It depends upon %d entities", entities));
+			return true;
+		}
+		
 		return false;
 	}
-
 }

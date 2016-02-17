@@ -6,10 +6,14 @@ import java.util.concurrent.Callable;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.smellycat.analysis.smells.Smell;
+import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
 public class SmartRepository implements Smell {
+
+	private static final int SQL_THRESHOLD = 43;
+	private static final int MCCABE_THRESHOLD = 42;
 
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
@@ -21,8 +25,18 @@ public class SmartRepository implements Smell {
 
 	@Override
 	public boolean conciliate(SmellyClass clazz) {
-		// TODO Auto-generated method stub
+		
+		int sqlComplexity = clazz.getAttribute("sql-complexity");
+		int mcCabeComplexity = clazz.getAttribute("mccabe");
+		
+		boolean hasHighSqlComplexity = sqlComplexity >= SQL_THRESHOLD;
+		boolean hasHighMcCabeComplexity = mcCabeComplexity >= MCCABE_THRESHOLD;
+		
+		if(clazz.is(SpringMVCArchitecture.REPOSITORY) && hasHighSqlComplexity && hasHighMcCabeComplexity) {
+			clazz.smells("Smart Repository", String.format("It has SQL complexity of %d and McCabe of %d", sqlComplexity, mcCabeComplexity));
+			return true;
+		}
+		
 		return false;
 	}
-
 }

@@ -25,7 +25,7 @@ public class SmellyCat {
 		opts.addOption("arch", true, "Architecture ('springmvc', 'android')");
 		opts.addOption("o", "output", true, "Path to the output. It should end with '.html'");
 		opts.addOption("p", "project", true, "Path to the project");
-		opts.addOption("a", "analysis", true, "Type of the analysis ('ck', 'smell')");
+		opts.addOption("a", "analysis", true, "Type of the analysis ('ck', 'smell'), or 'smell-attributes' for debug purposes.");
 		
 		CommandLineParser parser = new DefaultParser();
 		CommandLine cmd = parser.parse(opts, args);
@@ -43,7 +43,7 @@ public class SmellyCat {
 		}
 		
 		boolean invalidParams = 
-				(!cmd.getOptionValue("analysis").equals("ck") && !cmd.getOptionValue("analysis").equals("smell")) ||
+				(!cmd.getOptionValue("analysis").equals("ck") && !cmd.getOptionValue("analysis").equals("smell") && !cmd.getOptionValue("analysis").equals("smell-attributes")) ||
 				(!cmd.getOptionValue("arch").equals("springmvc") && !cmd.getOptionValue("arch").equals("android"));
 
 		if(invalidParams) {
@@ -67,9 +67,13 @@ public class SmellyCat {
 		if(analysis.equals("ck")) {
 			new CKAnalysis(arch,projectPath, output).run();
 		}
-		if(analysis.equals("smell")) {
+		else if(analysis.equals("smell")) {
 			Repository repo = new Repository();
-			new SmellAnalysis(arch, projectPath, output, repo).run();
+			new SmellAnalysis(arch, projectPath, output, repo, true).run();
+		}
+		else if(analysis.equals("smell-attributes")) {
+			Repository repo = new Repository();
+			new SmellAnalysis(arch, projectPath, output, repo, false).run();
 		}
 		
 		output.close();

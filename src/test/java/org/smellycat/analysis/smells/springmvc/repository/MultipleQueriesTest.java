@@ -27,6 +27,6 @@ public class MultipleQueriesTest extends SmellTest {
 		sc = repo.getByClass("mfa.t1.CorrectRepository");
 		Assert.assertEquals(0, sc.getAttribute("multiple-persistence-invocations"));
 	}
-	
+
 	// TODO: tests for the other persistence apis...
 }

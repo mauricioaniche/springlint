@@ -1,9 +1,11 @@
 package org.smellycat.domain;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.smellycat.analysis.smells.SmellDescription;
 import org.smellycat.architecture.ArchitecturalRole;
 
 public class SmellyClass {
@@ -12,7 +14,7 @@ public class SmellyClass {
 	private final String name;
 	private final String type;
 	private ArchitecturalRole role;
-	private Map<String, String> smells;
+	private Set<SmellDescription> smells;
 	private Map<String, Integer> attributes;
 	private String superclass;
 	private Set<String> interfaces;
@@ -23,7 +25,7 @@ public class SmellyClass {
 		this.type = type;
 		this.superclass = superclass;
 		this.interfaces = interfaces;
-		this.smells = new HashMap<String, String>();
+		this.smells = new HashSet<SmellDescription>();
 		this.attributes = new HashMap<String, Integer>();
 		this.role = ArchitecturalRole.OTHER;
 	}
@@ -44,12 +46,12 @@ public class SmellyClass {
 		return role;
 	}
 	
-	public void smells(String smell, String explanation) {
-		smells.put(smell, explanation);
+	public void smells(String smell, String description) {
+		smells.add(new SmellDescription(smell, description));
 	}
 	
 	public boolean hasSmell(String smell) {
-		return smells.containsKey(smell);
+		return smells.stream().anyMatch(s -> s.getName().equals(smell));
 	}
 	
 	public void setAttribute(String attribute, int value) {
@@ -112,8 +114,8 @@ public class SmellyClass {
 		return true;
 	}
 
-	public String getExplanationFor(String smell) {
-		return smells.get(smell);
+	public String getDescriptionFor(String smell) {
+		return smells.stream().filter(s->s.getName().equals(smell)).findFirst().get().getDescription();
 	}
 
 	public String getSuperclass() {
@@ -123,6 +125,9 @@ public class SmellyClass {
 	public Set<String> getInterfaces() {
 		return interfaces;
 	}
-	
+
+	public Set<SmellDescription> getSmells() {
+		return smells;
+	}
 	
 }
