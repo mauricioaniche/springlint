@@ -15,9 +15,11 @@ public class SmellyClass {
 	private final String type;
 	private ArchitecturalRole role;
 	private Set<SmellDescription> smells;
-	private Map<String, Integer> attributes;
 	private String superclass;
 	private Set<String> interfaces;
+
+	private Map<String, Integer> attributes;
+	private Map<String, String> notes;
 	
 	public SmellyClass(String file, String name, String type, String superclass, Set<String> interfaces) {
 		this.file = file;
@@ -26,8 +28,20 @@ public class SmellyClass {
 		this.superclass = superclass;
 		this.interfaces = interfaces;
 		this.smells = new HashSet<SmellDescription>();
-		this.attributes = new HashMap<String, Integer>();
 		this.role = ArchitecturalRole.OTHER;
+
+		this.attributes = new HashMap<String, Integer>();
+		this.notes = new HashMap<String, String>();
+	}
+	
+	public void appendNote(String key, String note) {
+		if(!notes.containsKey(key)) notes.put(key, "");
+		notes.put(key, (notes.get(key) + " " + note).trim());
+	}
+	
+	public String getNote(String key) {
+		if(!notes.containsKey(key)) return "";
+		return notes.get(key);
 	}
 	
 	public String getFile() {

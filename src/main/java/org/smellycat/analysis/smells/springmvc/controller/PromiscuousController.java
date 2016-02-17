@@ -28,12 +28,13 @@ public class PromiscuousController implements Smell {
 		
 		int routes = clazz.getAttribute("number-of-routes");
 		int services = clazz.getAttribute("number-of-services-as-dependencies");
+		String listOfServices = clazz.getNote("number-of-services-as-dependencies-violations");
 		
 		boolean hasManyRoutes = routes >= ROUTES_THRESHOLD;
 		boolean hasManyServices = services >= SERVICES_THRESHOLD;
 		
 		if(clazz.is(SpringMVCArchitecture.CONTROLLER) && hasManyRoutes && hasManyServices) {
-			clazz.smells("Promiscuous Controller", String.format("It has %d routes and %d services", routes, services));
+			clazz.smells("Promiscuous Controller", String.format("It has %d routes and %d services (%s)", routes, services, listOfServices));
 			return true;
 		}
 		

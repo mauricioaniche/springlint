@@ -43,7 +43,9 @@ public class ArchitecturalRoleDependenciesCountVisitor extends ASTVisitor {
 			
 			boolean notMySelf = possibleRole!= null && !possibleRole.equals(clazz);
 			if(possibleRole!= null && possibleRole.is(ar) && notMySelf) {
+				clazz.appendNote(attributeName + "-violations", className);
 				roles.add(className);
+				
 				clazz.setAttribute(attributeName, roles.size());
 			}
 		}

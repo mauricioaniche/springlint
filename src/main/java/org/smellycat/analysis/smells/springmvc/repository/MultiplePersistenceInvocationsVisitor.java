@@ -23,8 +23,10 @@ public class MultiplePersistenceInvocationsVisitor extends VariablesAndFieldsVis
 	
 	
 	public void endVisit(MethodDeclaration node) {
-		if(qtyPerMethod > 1)
+		if(qtyPerMethod > 1) {
 			clazz.setAttribute("multiple-persistence-invocations", 1);
+			saveMethodNameAsNote(node);
+		}
 		
 		super.endVisit(node);
 	}
@@ -41,6 +43,11 @@ public class MultiplePersistenceInvocationsVisitor extends VariablesAndFieldsVis
 		}
 		
 		return super.visit(node);
+	}
+
+	private void saveMethodNameAsNote(MethodDeclaration currentMethod) {
+		String methodName = currentMethod.getName().toString();
+		clazz.appendNote("multiple-persistence-invocations-violations",  methodName);
 	}
 
 }

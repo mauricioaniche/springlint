@@ -25,11 +25,12 @@ public class FatRepository implements Smell {
 	public boolean conciliate(SmellyClass clazz) {
 		
 		int entities = clazz.getAttribute("number-of-entities-as-dependencies");
+		String listOfEntities = clazz.getNote("number-of-entities-as-dependencies-violations");
 		
 		boolean hasHighEntities = entities >= ENTITY_THRESHOLD;
 		
 		if(clazz.is(SpringMVCArchitecture.REPOSITORY) && hasHighEntities) {
-			clazz.smells("Fat Repository", String.format("It depends upon %d entities", entities));
+			clazz.smells("Fat Repository", String.format("It depends upon %d entities (%s)", entities, listOfEntities));
 			return true;
 		}
 		

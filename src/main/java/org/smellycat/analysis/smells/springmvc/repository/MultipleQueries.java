@@ -23,9 +23,10 @@ public class MultipleQueries implements Smell {
 	public boolean conciliate(SmellyClass clazz) {
 		
 		boolean doMultiplePersistenceInvocations = clazz.getAttribute("multiple-persistence-invocations") == 1;
+		String badMethods = clazz.getNote("multiple-persistence-invocations-violations");
 		
 		if(clazz.is(SpringMVCArchitecture.REPOSITORY) && doMultiplePersistenceInvocations) {
-			clazz.smells("Multiple queries", String.format("It does more than one query in a method"));
+			clazz.smells("Multiple queries", String.format("The methods %s do more than one persistence action", badMethods));
 			return true;
 		}
 		
