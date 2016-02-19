@@ -47,9 +47,10 @@ public class PromiscuousControllerTest extends SmellTest {
 		tool.run();
 		
 		System.out.println(repo.all());
-		SmellyClass sc = repo.getByClass("mfa.t2.InvoiceController");
+		SmellyClass sc = repo.getByClass("mfa.t2.ManyRoutesController");
 		Assert.assertTrue(sc.hasSmell("Promiscuous Controller"));
-
+		sc = repo.getByClass("mfa.t2.ManyServicesController");
+		Assert.assertTrue(sc.hasSmell("Promiscuous Controller"));
 		sc = repo.getByClass("mfa.t2.NormalController");
 		Assert.assertFalse(sc.hasSmell("Promiscuous Controller"));
 	}

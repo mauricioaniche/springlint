@@ -33,7 +33,7 @@ public class PromiscuousController implements Smell {
 		boolean hasManyRoutes = routes >= ROUTES_THRESHOLD;
 		boolean hasManyServices = services >= SERVICES_THRESHOLD;
 		
-		if(clazz.is(SpringMVCArchitecture.CONTROLLER) && hasManyRoutes && hasManyServices) {
+		if(clazz.is(SpringMVCArchitecture.CONTROLLER) && (hasManyRoutes || hasManyServices)) {
 			clazz.smells("Promiscuous Controller", String.format("It has %d routes and %d services (%s)", routes, services, listOfServices));
 			return true;
 		}

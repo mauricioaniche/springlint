@@ -7,7 +7,7 @@ import mfa.t2.p1.InvoiceService1;
 
 @Controller
 @X
-class InvoiceController {
+class ManyServicesController {
 
 	@Autowired
 	private InvoiceService1 service1;
@@ -26,35 +26,10 @@ class InvoiceController {
 	public void m1() {
 
 		service1.action1();
-	}
-
-	@RequestMapping
-	public void m2() {
-
 		service2.action1();
-	}
-
-	@RequestMapping
-	public void m3() {
-
 		service3.action1();
-	}
-
-	@RequestMapping
-	public void m4() {
-
 		service4.action1();
-	}
-
-	@RequestMapping
-	public void m5() {
-
 		service5.action1();
-	}
-
-	@RequestMapping
-	public void m6() {
-
 		service6.action1();
 	}
 
