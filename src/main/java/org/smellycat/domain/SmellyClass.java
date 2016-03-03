@@ -127,6 +127,10 @@ public class SmellyClass {
 			return false;
 		return true;
 	}
+	
+	public boolean hasAnySmell() {
+		return !smells.isEmpty();
+	}
 
 	public String getDescriptionFor(String smell) {
 		return smells.stream().filter(s->s.getName().equals(smell)).findFirst().get().getDescription();
