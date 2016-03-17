@@ -12,8 +12,8 @@ import org.smellycat.domain.SmellyClass;
 
 public class PromiscuousController implements Smell {
 
-	private static final int ROUTES_THRESHOLD = 12;
-	private static final int SERVICES_THRESHOLD = 6;
+	private static final int ROUTES_THRESHOLD = 10;
+	private static final int SERVICES_THRESHOLD = 3;
 	
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
@@ -30,8 +30,8 @@ public class PromiscuousController implements Smell {
 		int services = clazz.getAttribute("number-of-services-as-dependencies");
 		String listOfServices = clazz.getNote("number-of-services-as-dependencies-violations");
 		
-		boolean hasManyRoutes = routes >= ROUTES_THRESHOLD;
-		boolean hasManyServices = services >= SERVICES_THRESHOLD;
+		boolean hasManyRoutes = routes > ROUTES_THRESHOLD;
+		boolean hasManyServices = services > SERVICES_THRESHOLD;
 		
 		if(clazz.is(SpringMVCArchitecture.CONTROLLER) && (hasManyRoutes || hasManyServices)) {
 			clazz.smells("Promiscuous Controller", String.format("It has %d routes and %d services (%s)", routes, services, listOfServices));

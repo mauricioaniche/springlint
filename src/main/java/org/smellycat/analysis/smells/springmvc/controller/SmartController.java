@@ -12,7 +12,7 @@ import org.smellycat.domain.SmellyClass;
 
 public class SmartController implements Smell {
 
-	private static final int RFC_THRESHOLD = 64;
+	private static final int RFC_THRESHOLD = 55;
 
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
@@ -26,7 +26,7 @@ public class SmartController implements Smell {
 		
 		int rfc = clazz.getAttribute("rfc-but-spring");
 		
-		boolean hasHighRfc = rfc >= RFC_THRESHOLD;
+		boolean hasHighRfc = rfc > RFC_THRESHOLD;
 		
 		if(clazz.is(SpringMVCArchitecture.CONTROLLER) && hasHighRfc) {
 			clazz.smells("Smart Controller", String.format("It has RFC=%d", rfc));
