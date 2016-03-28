@@ -10,7 +10,7 @@ import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
-public class MultipleQueries implements Smell {
+public class LaboriousRepositoryMethod implements Smell {
 
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
@@ -26,7 +26,7 @@ public class MultipleQueries implements Smell {
 		String badMethods = clazz.getNote("multiple-persistence-invocations-violations");
 		
 		if(clazz.is(SpringMVCArchitecture.REPOSITORY) && doMultiplePersistenceInvocations) {
-			clazz.smells("Multiple queries", String.format("The methods %s do more than one persistence action", badMethods));
+			clazz.smells("Laborious Repository Method", String.format("The methods %s do more than one persistence action", badMethods));
 			return true;
 		}
 		

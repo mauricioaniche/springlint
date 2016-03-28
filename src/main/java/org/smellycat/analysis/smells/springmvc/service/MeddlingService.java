@@ -10,7 +10,7 @@ import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
-public class DBQueryingService implements Smell {
+public class MeddlingService implements Smell {
 
 	@Override
 	public List<Callable<ASTVisitor>> analyzers(Repository repo, SmellyClass clazz) {
@@ -24,7 +24,7 @@ public class DBQueryingService implements Smell {
 		boolean doMultiplePersistenceInvocations = clazz.getAttribute("use-persistence-mechanism") == 1;
 		
 		if(clazz.is(SpringMVCArchitecture.SERVICE) && doMultiplePersistenceInvocations) {
-			clazz.smells("DB Querying service", String.format("It uses a persistence mechanism."));
+			clazz.smells("Meddling service", String.format("It uses a persistence mechanism."));
 			return true;
 		}
 		

@@ -8,7 +8,7 @@ import org.smellycat.analysis.smells.SmellTest;
 import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
 import org.smellycat.domain.SmellyClass;
 
-public class MultipleQueriesTest extends SmellTest {
+public class LaboriousRepositoryMethodTest extends SmellTest {
 
 	private SpringMVCArchitecture arch;
 
