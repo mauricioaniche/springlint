@@ -8,6 +8,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.MarkerAnnotation;
 import org.eclipse.jdt.core.dom.NormalAnnotation;
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
+import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.smellycat.architecture.ArchitecturalRole;
 import org.smellycat.architecture.ArchitecturalRoleVisitor;
 
@@ -17,9 +18,19 @@ import br.com.aniche.ck.CKReport;
 public class SpringMVCArchitecturalRoleVisitor extends ArchitecturalRoleVisitor {
 
 	private Set<String> allAnnotations;
+	private int deep=0;
 	
 	public SpringMVCArchitecturalRoleVisitor() {
 		this.allAnnotations = new HashSet<String>();
+	}
+	
+	public boolean visit(TypeDeclaration node) {
+		deep++;
+		return super.visit(node);
+	}
+
+	public void endVisit(TypeDeclaration node) {
+		deep--;
 	}
 	
 	public boolean visit(MarkerAnnotation node) {
@@ -39,6 +50,8 @@ public class SpringMVCArchitecturalRoleVisitor extends ArchitecturalRoleVisitor 
 	
 
 	private void addAnnotation(Annotation o) {
+		if(deep>1) return;
+		
 		String annotation = o.getTypeName().toString();
 		allAnnotations.add(annotation);
 		
