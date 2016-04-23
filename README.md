@@ -12,7 +12,6 @@ and `Fragment`.
 Examples of the analysis: [CK in SSP (Spring MVC)](http://mauricioaniche.github.io/smellycat/ssp.html),
 [CK in AnyMemo (Android)](http://mauricioaniche.github.io/smellycat/anymemo.html).
 
-**Currently, only CK mode is working. We are still working on smell analysis.**
 
 # How to interpret?
 
@@ -65,7 +64,6 @@ Still working on it...
 
 ```
 usage: java -jar smellycat
- -a,--analysis <arg>   Type of the analysis ('ck', 'smell')
  -arch <arg>           Architecture ('springmvc', 'android')
  -o,--output <arg>     Path to the output. It should end with '.html'
  -p,--project <arg>    Path to the project
@@ -84,10 +82,6 @@ Software Maintenance (ICSM), 2010 IEEE International Conference on. IEEE, 2010.
 
 * Chidamber, Shyam R., and Chris F. Kemerer. "A metrics suite for object oriented design." 
 Software Engineering, IEEE Transactions on 20.6 (1994): 476-493.
-
-* Aniche, Maurício F., Gustavo A. Oliva, and Marco A. Gerosa. "Are the methods in your 
-data access objects (DAOs) in the right place? A preliminary study." Managing Technical Debt (MTD), 
-2014 Sixth International Workshop on. IEEE, 2014.
 
 # License
 
