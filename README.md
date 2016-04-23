@@ -26,8 +26,6 @@ they are very far from what we consider "good".
 
 You can see the specific thresholds values in our paper.
 
-# Analysis
-
 ## CK metrics
 
 SmellyCat analyses CK metrics in your architectural roles and
@@ -64,16 +62,15 @@ Still working on it...
 
 ```
 usage: java -jar smellycat
- -arch <arg>           Architecture ('springmvc', 'android')
- -o,--output <arg>     Path to the output. It should end with '.html'
- -p,--project <arg>    Path to the project
+ -arch <arg>          Architecture ('springmvc', 'android')
+ -o,--output <arg>    Path to the output. Should be a dir ending with /
+ -otype <arg>         Type of the output: 'csv', 'html'
+ -p,--project <arg>   Path to the project
 ```
 
 # Publications
 
 TODO: list of publications here
-
-TODO: how to cite?
 
 # References
 
