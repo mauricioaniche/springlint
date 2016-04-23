@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.smellycat.analysis.smells.SmellAnalysis;
 import org.smellycat.analysis.smells.SmellTest;
 import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
+import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
 public class LaboriousRepositoryMethodTest extends SmellTest {
@@ -19,8 +20,8 @@ public class LaboriousRepositoryMethodTest extends SmellTest {
 	
 	@Test
 	public void identifyMultipleQueriesInASingleMethod() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "multiplequeries/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "multiplequeries/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.WrongRepository");
 		Assert.assertEquals(1, sc.getAttribute("multiple-persistence-invocations"));

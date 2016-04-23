@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.smellycat.analysis.smells.SmellAnalysis;
 import org.smellycat.analysis.smells.SmellTest;
 import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
+import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
 public class MeddlingServiceTest extends SmellTest {
@@ -19,8 +20,8 @@ public class MeddlingServiceTest extends SmellTest {
 	
 	@Test
 	public void shouldDetectTheUseOfJDBC() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceService");
 		Assert.assertEquals(1, sc.getAttribute("use-persistence-mechanism"));
@@ -29,8 +30,8 @@ public class MeddlingServiceTest extends SmellTest {
 
 	@Test
 	public void shouldDetectTheUseOfJPA() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.JPAService");
 		Assert.assertEquals(1, sc.getAttribute("use-persistence-mechanism"));
@@ -38,8 +39,8 @@ public class MeddlingServiceTest extends SmellTest {
 
 	@Test
 	public void shouldDetectTheUseOfHibernate() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.HibernateService");
 		Assert.assertEquals(1, sc.getAttribute("use-persistence-mechanism"));
@@ -52,8 +53,8 @@ public class MeddlingServiceTest extends SmellTest {
 	
 	@Test
 	public void ignoreOnlyImports() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.CleanService");
 		Assert.assertEquals(0, sc.getAttribute("use-persistence-mechanism"));

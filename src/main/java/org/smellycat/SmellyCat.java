@@ -10,11 +10,8 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.log4j.Logger;
-import org.smellycat.analysis.ck.CKAnalysis;
-import org.smellycat.analysis.smells.SmellAnalysis;
 import org.smellycat.architecture.Architecture;
 import org.smellycat.architecture.ArchitectureFactory;
-import org.smellycat.domain.Repository;
 
 public class SmellyCat {
 	
@@ -25,7 +22,6 @@ public class SmellyCat {
 		opts.addOption("arch", true, "Architecture ('springmvc', 'android')");
 		opts.addOption("o", "output", true, "Path to the output. It should end with '.html'");
 		opts.addOption("p", "project", true, "Path to the project");
-		opts.addOption("a", "analysis", true, "Type of the analysis ('ck', 'smell'), or 'smell-attributes' for debug purposes.");
 		
 		CommandLineParser parser = new DefaultParser();
 		CommandLine cmd = parser.parse(opts, args);
@@ -33,8 +29,7 @@ public class SmellyCat {
 		boolean missingArgument = 
 				!cmd.hasOption("arch") || 
 				!cmd.hasOption("output") || 
-				!cmd.hasOption("project") || 
-				!cmd.hasOption("analysis");
+				!cmd.hasOption("project"); 
 
 		if(missingArgument) {
 			HelpFormatter formatter = new HelpFormatter();
@@ -43,7 +38,6 @@ public class SmellyCat {
 		}
 		
 		boolean invalidParams = 
-				(!cmd.getOptionValue("analysis").equals("ck") && !cmd.getOptionValue("analysis").equals("smell") && !cmd.getOptionValue("analysis").equals("smell-attributes")) ||
 				(!cmd.getOptionValue("arch").equals("springmvc") && !cmd.getOptionValue("arch").equals("android"));
 
 		if(invalidParams) {
@@ -53,7 +47,6 @@ public class SmellyCat {
 			System.exit(-1);
 		}
 		
-		String analysis = cmd.getOptionValue("analysis");
 		Architecture arch = new ArchitectureFactory().build(cmd.getOptionValue("arch"));
 		String projectPath = cmd.getOptionValue("project");
 		String outputPath = cmd.getOptionValue("output");
@@ -64,17 +57,8 @@ public class SmellyCat {
 		log.info("#          Smelly Cat - Spring MVC          #");
 		log.info("#  www.github.com/mauricioaniche/smellycat  #");
 		log.info("# ----------------------------------------- #");
-		if(analysis.equals("ck")) {
-			new CKAnalysis(arch,projectPath, output).run();
-		}
-		else if(analysis.equals("smell")) {
-			Repository repo = new Repository();
-			new SmellAnalysis(arch, projectPath, output, repo, true).run();
-		}
-		else if(analysis.equals("smell-attributes")) {
-			Repository repo = new Repository();
-			new SmellAnalysis(arch, projectPath, output, repo, false).run();
-		}
+		
+		new RunAllAnalysis(arch, projectPath, output).run();
 		
 		output.close();
 		long endTime = System.currentTimeMillis();

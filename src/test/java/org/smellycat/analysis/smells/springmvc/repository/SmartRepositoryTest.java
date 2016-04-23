@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.smellycat.analysis.smells.SmellAnalysis;
 import org.smellycat.analysis.smells.SmellTest;
 import org.smellycat.architecture.springmvc.SpringMVCArchitecture;
+import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
 
 public class SmartRepositoryTest extends SmellTest {
@@ -19,8 +20,8 @@ public class SmartRepositoryTest extends SmellTest {
 	
 	@Test
 	public void countKeywords() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceRepository");
 		Assert.assertEquals(3, sc.getAttribute("sql-complexity"));
@@ -28,8 +29,8 @@ public class SmartRepositoryTest extends SmellTest {
 
 	@Test
 	public void countKeywordsInAllMethods() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceRepository2");
 		Assert.assertEquals(12, sc.getAttribute("sql-complexity"));
@@ -37,8 +38,8 @@ public class SmartRepositoryTest extends SmellTest {
 
 	@Test
 	public void understandInlineSql() {
-		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1", ps, repo);
-		tool.run();
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "smart-repository/t1");
+		Repository repo = tool.run();
 		
 		SmellyClass sc = repo.getByClass("mfa.t1.InvoiceRepository3");
 		Assert.assertEquals(3, sc.getAttribute("sql-complexity"));

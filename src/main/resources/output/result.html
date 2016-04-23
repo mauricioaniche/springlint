@@ -139,6 +139,21 @@
 			text-align: center;
 		}
 
+		.table-row {
+			font-family: Arial;
+			font-size: 0.8em;
+			margin-bottom: 3px;
+
+		}
+
+		.table-row td {
+			border-bottom: 1px solid #5B3A8F;
+		}
+
+		#smellsText {
+			margin: 50px 20px;
+		}
+
 
 	</style>
 </head>
@@ -157,6 +172,7 @@
 				<a class="action-metric">rfc</a>
 				<a class="action-metric">nom</a>
 				<a class="action-metric">lcom</a>
+				<a class="action-metric">smells</a>
 			</nav>
 			<nav id="nav-role">
 
@@ -165,14 +181,18 @@
 
 	</header>
 
-	<div class="content">
+	<div class="content" id="ck">
 		<div id="container"></div>
+	</div>
+
+	<div id="smellsText">
+dsadsada
 	</div>
 
 	<footer>
 		<div>
-		Project dir: ##projectDir##<br/>
-		Generated in ##date##
+		Project dir: /Users/mauricioaniche/Desktop/SSP/<br/>
+		Generated in 2016-04-23
 		</div>
 	</footer>
 
@@ -181,10 +201,14 @@
 
 <script>
 
-##arch##
+##archThresholds##
 
 var classes =
-##json##
+##ck##
+;
+
+var smells=
+##smells##
 ;
 
 function dataFrom(role, metric) {
@@ -259,13 +283,42 @@ function plotChart(title, thresholds, d) {
 
 
 function action() {
+
 	var role = $("#nav-role").find(".selected").html();
 	var metric = $("#nav-metric").find(".selected").html();
 
 	console.log(role + " " + metric);
-	filter(role,metric);
+	if(metric=="smells") {
+		$("#smellsText").show();
+		$("#ck").hide();
+		showSmells(role);
+	} else {
+		$("#smellsText").hide();
+		$("#ck").show();
+		filter(role,metric);
+	}
 }
 
+function showSmells(role) {
+
+	var app = ""
+	for(i=0; i<smells.length;i++) {
+		if(smells[i].role.name==role && smells[i].smells.length>0) {
+			app+="<tr class='table-row'>";
+			app+="<td width='80%'>" + smells[i].name + "</td>";
+			app+="<td>";
+			for(j=0; j<smells[i].smells.length;j++) {
+				app+=smells[i].smells[j].name + "<br>";
+			}
+			app+="</td>";
+			app+="</tr>";
+		}
+	}
+
+	app = "<table width=\"100%\">" + app + "</table>";
+	$("#smellsText").html(app);
+
+}
 
 function menu() {
 	for(i = 0; i < roles.length; i++) {
@@ -294,3 +347,4 @@ $(function() {
 });
 </script>
 </html>
+
