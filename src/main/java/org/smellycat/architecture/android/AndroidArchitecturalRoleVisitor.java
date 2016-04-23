@@ -11,13 +11,13 @@ import br.com.aniche.ck.CKReport;
 
 public class AndroidArchitecturalRoleVisitor extends ArchitecturalRoleVisitor {
 
-	private String superclass;
+	private String superclass = null;
 
 	public boolean visit(TypeDeclaration node) {
 		ITypeBinding binding = node.resolveBinding();
 		
 		if(superclass == null)
-			if(binding!=null && binding.getSuperclass() !=null) 
+			if(binding!=null && binding.getSuperclass() !=null && superclass==null) 
 				superclass = binding.getSuperclass().getQualifiedName();
 		
 		return super.visit(node);
