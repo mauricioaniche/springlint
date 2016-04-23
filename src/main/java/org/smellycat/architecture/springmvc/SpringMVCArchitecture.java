@@ -3,6 +3,13 @@ package org.smellycat.architecture.springmvc;
 import java.util.Arrays;
 import java.util.List;
 
+import org.smellycat.analysis.smells.Smell;
+import org.smellycat.analysis.smells.springmvc.controller.PromiscuousController;
+import org.smellycat.analysis.smells.springmvc.controller.SmartController;
+import org.smellycat.analysis.smells.springmvc.repository.FatRepository;
+import org.smellycat.analysis.smells.springmvc.repository.LaboriousRepositoryMethod;
+import org.smellycat.analysis.smells.springmvc.repository.SmartRepository;
+import org.smellycat.analysis.smells.springmvc.service.MeddlingService;
 import org.smellycat.architecture.ArchitecturalRole;
 import org.smellycat.architecture.ArchitecturalRoleVisitor;
 import org.smellycat.architecture.Architecture;
@@ -34,6 +41,13 @@ public class SpringMVCArchitecture implements Architecture {
 	@Override
 	public String thresholdsFile() {
 		return "springmvc.js";
+	}
+
+	@Override
+	public List<Smell> smells() {
+		return Arrays.asList(
+			new PromiscuousController(), new SmartController(), new SmartRepository(), new FatRepository(), new MeddlingService(), new LaboriousRepositoryMethod()
+		);
 	}
 
 }

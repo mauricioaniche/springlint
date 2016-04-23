@@ -1,5 +1,6 @@
 package org.smellycat.analysis.smells;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
@@ -14,9 +15,9 @@ public class SmellsRequestor extends FileASTRequestor {
 	private static Logger log = Logger.getLogger(SmellsRequestor.class);
 	
 	private Repository repo;
-	private Smell[] smells;
+	private List<Smell> smells;
 
-	public SmellsRequestor(Repository repo, Smell... smells) {
+	public SmellsRequestor(Repository repo, List<Smell> smells) {
 		this.repo = repo;
 		this.smells = smells;
 	}
