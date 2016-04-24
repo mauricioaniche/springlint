@@ -5,9 +5,9 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FileASTRequestor;
 import org.smellycat.architecture.ArchitecturalRoleVisitor;
 import org.smellycat.architecture.Architecture;
-import org.smellycat.architecture.springmvc.ClassInfoVisitor;
 import org.smellycat.domain.Repository;
 import org.smellycat.domain.SmellyClass;
+import org.smellycat.utils.jdt.ClassInfoVisitor;
 
 public class ArchitecturalRoleRequestor extends FileASTRequestor {
 

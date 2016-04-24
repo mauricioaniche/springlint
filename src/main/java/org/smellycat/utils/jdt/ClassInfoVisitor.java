@@ -1,4 +1,4 @@
-package org.smellycat.architecture.springmvc;
+package org.smellycat.utils.jdt;
 
 import java.util.Collections;
 import java.util.HashSet;

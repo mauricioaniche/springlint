@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.smellycat.analysis.smells.Parser;
 import org.smellycat.analysis.smells.SmellTest;
-import org.smellycat.architecture.springmvc.ClassInfoVisitor;
+import org.smellycat.utils.jdt.ClassInfoVisitor;
 
 public class ClassInfoVisitorTest extends SmellTest {
 	

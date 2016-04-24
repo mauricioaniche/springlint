@@ -1,0 +1,5 @@
+
+@Repository
+class AlgoRepository {
+	
+}

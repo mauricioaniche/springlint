@@ -1,0 +1,5 @@
+
+@Controller
+class AlgoController {
+	
+}
