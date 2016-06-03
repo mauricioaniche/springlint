@@ -14,7 +14,7 @@
         <appender-ref ref="main"/>
     </category>
 
-    <category name="org.smellycat">
+    <category name="org.springlint">
         <priority value="INFO"/>
         <appender-ref ref="main"/>
     </category>

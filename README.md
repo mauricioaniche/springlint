@@ -1,17 +1,7 @@
-# SmellyCat
+# SpringLint
 
-SmellyCat is a simple tool that detects smells in your classes.
+SpringLint is a simple tool that detects smells in your Spring MVC systems.
 The tool is based on Maurício Aniche's PhD thesis. 
-
-Currently, we only support two architectures: Spring MVC and Android.
-In Spring MVC, we evaluate the quality of your `Controllers`, 
-`Services`, `Components`,`Repositories`, and `Entities`.
-In Android, we evaluate the quality of your `Activity`, `Task`,
-and `Fragment`.
-
-Examples of the analysis: [CK in SSP (Spring MVC)](http://mauricioaniche.github.io/smellycat/ssp.html),
-[CK in AnyMemo (Android)](http://mauricioaniche.github.io/smellycat/anymemo.html).
-
 
 # How to interpret?
 
@@ -24,7 +14,10 @@ care of it. Light red means high risk, and dark red means
 very high risk. These are the classes you should be worried about, as
 they are very far from what we consider "good".
 
-You can see the specific thresholds values in our paper.
+SpringLint uses different thresholds for each architectural role,
+e.g., if a class is a Controller, it uses [26,29,34] as thresholds for
+coupling, while it uses [16,20,25] for coupling in Entities. Numbers
+were derived from an empirical study in 120 Spring MVC systems.
 
 ## CK metrics
 
@@ -56,13 +49,26 @@ the number, the less cohesive is the class.
 
 ## Code Smells
 
-Still working on it...
+We propose 6 smells for Spring MVC applications. More details about them
+can be found in our paper.
+
+- **Promiscuous Controller**: When a Controller offers too many actions.
+
+- **Smart Controller**: When a Controller offers too much flow control.
+
+- **Meddling Service**: A Service that directly queries the database.
+
+- **Smart repositories**: Complex logic in the Repositories.
+
+- **Laborious Repository Method**: A method in a Repository that performs multiple actions 
+with the database.
+
+- **Fat Repository**: A Repository that manages too many entities.
 
 # Usage
 
 ```
-usage: java -jar smellycat
- -arch <arg>          Architecture ('springmvc', 'android')
+usage: java -jar springlint
  -o,--output <arg>    Path to the output. Should be a dir ending with /
  -otype <arg>         Type of the output: 'csv', 'html'
  -p,--project <arg>   Path to the project
@@ -79,6 +85,15 @@ Software Maintenance (ICSM), 2010 IEEE International Conference on. IEEE, 2010.
 
 * Chidamber, Shyam R., and Chris F. Kemerer. "A metrics suite for object oriented design." 
 Software Engineering, IEEE Transactions on 20.6 (1994): 476-493.
+
+# Authors
+
+- Maurício Aniche (m.f.aniche at tudelft dot nl)
+- Christoph Treude
+- Arie van Deursen
+- Gabriele Bavota
+- Andy Zaidman
+- Marco Aurélio Gerosa
 
 # License
 
