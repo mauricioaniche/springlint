@@ -3,7 +3,7 @@
 	<groupId>com.github.mauricioaniche</groupId>
 	<artifactId>springlint</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.2</version>
 	<name>SpringLint</name>
 	<url>http://maven.apache.org</url>
 
@@ -32,7 +32,7 @@
 		<url>http://github.com/mauricioaniche/springlint</url>
 		<connection>scm:git:git://github.com/mauricioaniche/springlint</connection>
 		<developerConnection>scm:git:git@github.com:mauricioaniche/springlint.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>springlint-0.2</tag>
   </scm>
 
 
