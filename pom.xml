@@ -6,6 +6,7 @@
 	<version>0.3-SNAPSHOT</version>
 	<name>SpringLint</name>
 	<url>http://maven.apache.org</url>
+	<description>Code smells detector for Spring MVC systems</description>
 
 	<licenses>
 		<license>
