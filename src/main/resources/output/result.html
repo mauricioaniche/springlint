@@ -345,7 +345,7 @@ function showSmells(role) {
 
 	var app = ""
 	for(i=0; i<smells.length;i++) {
-		if(smells[i].role.name==role && smells[i].smells.length>0) {
+		if(smells[i].role.name==role) {
 			app+="<tr class='table-row'>";
 			app+="<td width='80%'>" + smells[i].name + "</td>";
 			app+="<td>";
