@@ -3,6 +3,21 @@
 SpringLint is a simple tool that detects smells in your Spring MVC systems.
 The tool is based on Maurício Aniche's PhD thesis. 
 
+# Usage
+
+```
+usage: java -jar springlint
+ -o,--output <arg>    Path to the output. Should be a dir ending with /
+ -otype <arg>         Type of the output: 'csv', 'html'
+ -p,--project <arg>   Path to the project
+```
+
+Or if you like Maven:
+
+```
+mvn com.github.mauricioaniche.springlint:springlint-maven-plugin:0.3:springlint
+```
+
 # How to interpret?
 
 SmellyCat produces a treemap. It means that the higher the class' square,
@@ -65,15 +80,6 @@ with the database.
 
 - **Fat Repository**: A Repository that manages too many entities.
 
-# Usage
-
-```
-usage: java -jar springlint
- -o,--output <arg>    Path to the output. Should be a dir ending with /
- -otype <arg>         Type of the output: 'csv', 'html'
- -p,--project <arg>   Path to the project
-```
-
 # Publications
 
 TODO: list of publications here
@@ -86,14 +92,9 @@ Software Maintenance (ICSM), 2010 IEEE International Conference on. IEEE, 2010.
 * Chidamber, Shyam R., and Chris F. Kemerer. "A metrics suite for object oriented design." 
 Software Engineering, IEEE Transactions on 20.6 (1994): 476-493.
 
-# Authors
+# Author
 
-- Maurício Aniche (m.f.aniche at tudelft dot nl)
-- Christoph Treude
-- Arie van Deursen
-- Gabriele Bavota
-- Andy Zaidman
-- Marco Aurélio Gerosa
+Maurício Aniche (m.f.aniche at tudelft dot nl)
 
 # License
 
