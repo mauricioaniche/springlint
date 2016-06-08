@@ -14,7 +14,7 @@
         <appender-ref ref="main"/>
     </category>
 
-    <category name="org.springlint">
+    <category name="com.github.mauricioaniche">
         <priority value="INFO"/>
         <appender-ref ref="main"/>
     </category>

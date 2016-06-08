@@ -7,13 +7,18 @@ import java.util.Set;
 
 import com.github.mauricioaniche.springlint.analysis.smells.SmellDescription;
 import com.github.mauricioaniche.springlint.architecture.ArchitecturalRole;
+import com.google.gson.annotations.Expose;
 
 public class SmellyClass {
 
+	@Expose
 	private final String file;
+	@Expose
 	private final String name;
 	private final String type;
+	@Expose
 	private ArchitecturalRole role;
+	@Expose
 	private Set<SmellDescription> smells;
 	private String superclass;
 	private Set<String> interfaces;

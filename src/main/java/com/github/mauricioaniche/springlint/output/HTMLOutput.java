@@ -16,6 +16,7 @@ import com.github.mauricioaniche.springlint.analysis.ck.CKAnalysis;
 import com.github.mauricioaniche.springlint.architecture.Architecture;
 import com.github.mauricioaniche.springlint.domain.Repository;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import br.com.aniche.ck.CKNumber;
 
@@ -30,7 +31,7 @@ public class HTMLOutput implements Output {
 	public void printOutput(Architecture arch, Map<String, List<CKNumber>> ckResults, Repository smellResults) {
 
 		String ckResultsInJson = new Gson().toJson(ckResults);
-		String smellResultsInJson = new Gson().toJson(smellResults.all());
+		String smellResultsInJson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(smellResults.allSmelly());
 		
 		try {
 			String html = readResource("/output/result.html");

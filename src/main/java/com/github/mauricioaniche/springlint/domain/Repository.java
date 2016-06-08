@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Repository {
 
@@ -31,7 +32,12 @@ public class Repository {
 
 	public Collection<SmellyClass> all() {
 		return mapPerFile.values();
-		
+	}
+
+	public Collection<SmellyClass> allSmelly() {
+		return mapPerFile.values().stream()
+			.filter(x -> !x.getSmells().isEmpty())
+			.collect(Collectors.toList());
 	}
 
 	public SmellyClass getByClass(String qualifiedName) {

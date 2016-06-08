@@ -1,10 +1,14 @@
 package com.github.mauricioaniche.springlint.architecture;
 
+import com.google.gson.annotations.Expose;
+
 public class ArchitecturalRole {
 
 	public static ArchitecturalRole OTHER = new ArchitecturalRole(9999, "other");
 	
+	@Expose
 	private String name;
+	@Expose
 	private int id;
 
 	public ArchitecturalRole(int id, String name) {

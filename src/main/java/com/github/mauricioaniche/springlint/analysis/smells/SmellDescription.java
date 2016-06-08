@@ -1,8 +1,12 @@
 package com.github.mauricioaniche.springlint.analysis.smells;
 
+import com.google.gson.annotations.Expose;
+
 public class SmellDescription {
 
+	@Expose
 	private String name;
+	@Expose
 	private String description;
 	
 	public SmellDescription(String name, String description) {
