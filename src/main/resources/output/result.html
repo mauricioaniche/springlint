@@ -454,27 +454,26 @@ function showRole(role) {
 
 function showSmells(role) {
 
-  if(smells.length==0) {
-	  $("#" + role + "-smells").html("No!");
+  var app = ""
+  var qty = 0;
+  for(i=0; i<smells.length;i++) {
+    if(smells[i].role.name==role && smells[i].smells.length>0) {
+      app+="<tr class='table-row'>";
+      app+="<td width='80%'>" + smells[i].name + "</td>";
+      app+="<td>";
+      for(j=0; j<smells[i].smells.length;j++) {
+        app+=smells[i].smells[j].name + "<br>";
+        qty++;
+      }
+      app+="</td>";
+      app+="</tr>";
+    }
   }
-  else {
-	  var app = ""
-	  for(i=0; i<smells.length;i++) {
-	    if(smells[i].role.name==role && smells[i].smells.length>0) {
-	      app+="<tr class='table-row'>";
-	      app+="<td width='80%'>" + smells[i].name + "</td>";
-	      app+="<td>";
-	      for(j=0; j<smells[i].smells.length;j++) {
-	        app+=smells[i].smells[j].name + "<br>";
-	      }
-	      app+="</td>";
-	      app+="</tr>";
-	    }
-	  }
-	
-	  app = "<table width=\"100%\">" + app + "</table>";
-	  $("#" + role + "-smells").html(app);
-  }
+
+  app = "<table width=\"100%\">" + app + "</table>";
+  
+  if(qty>0) $("#" + role + "-smells").html(app);
+  else $("#" + role + "-smells").html("No!");
 }
 
 $(function() {
