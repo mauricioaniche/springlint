@@ -7,7 +7,7 @@ The tool is based on Maurício Aniche's PhD thesis.
 
 ```
 java -jar springlint
- -o,--output <arg>    Path to the output. Should be a dir ending with /
+ -o,--output <arg>    Path to the directory output.
  -otype <arg>         Type of the output: 'csv', 'html'
  -p,--project <arg>   Path to the project
 ```
