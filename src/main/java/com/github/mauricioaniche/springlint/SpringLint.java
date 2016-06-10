@@ -22,7 +22,7 @@ public class SpringLint {
 
 	public static void main(String[] args) throws FileNotFoundException, ParseException {
 		Options opts = new Options();
-		opts.addOption("o", "output", true, "Path to the output. Should be a dir ending with /");
+		opts.addOption("o", "output", true, "Path to the directory output");
 		opts.addOption("otype", true, "Type of the output: 'csv', 'html'");
 		opts.addOption("p", "project", true, "Path to the project");
 		

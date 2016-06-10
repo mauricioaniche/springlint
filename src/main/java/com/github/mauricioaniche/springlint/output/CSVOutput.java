@@ -17,7 +17,7 @@ public class CSVOutput implements Output{
 	private PrintStream output;
 
 	public CSVOutput(String outputPath) throws FileNotFoundException {
-		this.output = new PrintStream(outputPath + "smells.csv"); 
+		this.output = new PrintStream(outputPath+(outputPath.endsWith("/")?"":"/") + "smells.csv"); 
 	}
 
 	@Override

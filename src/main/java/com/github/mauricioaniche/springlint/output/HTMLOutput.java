@@ -25,7 +25,7 @@ public class HTMLOutput implements Output {
 	private PrintStream output;
 
 	public HTMLOutput(String output) throws FileNotFoundException {
-		this.output = new PrintStream(output+"result.html");
+		this.output = new PrintStream(output+(output.endsWith("/")?"":"/")+"springlint-result.html");
 	}
 
 	public void printOutput(Architecture arch, Map<String, List<CKNumber>> ckResults, Repository smellResults) {
@@ -38,7 +38,7 @@ public class HTMLOutput implements Output {
 			html = html
 				.replace("##ck##", ckResultsInJson)
 				.replace("##smells##", smellResultsInJson)
-				.replace("##date##", new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
+				.replace("##date##", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
 			
 			output.print(html);
 		} catch (IOException e) {
