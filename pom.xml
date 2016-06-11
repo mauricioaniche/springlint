@@ -3,7 +3,7 @@
 	<groupId>com.github.mauricioaniche</groupId>
 	<artifactId>springlint</artifactId>
 	<packaging>jar</packaging>
-	<version>0.4-SNAPSHOT</version>
+	<version>0.4</version>
 	<name>SpringLint</name>
 	<url>http://maven.apache.org</url>
 	<description>Code smells detector for Spring MVC systems</description>
@@ -33,7 +33,7 @@
 		<url>http://github.com/mauricioaniche/springlint</url>
 		<connection>scm:git:git://github.com/mauricioaniche/springlint</connection>
 		<developerConnection>scm:git:git@github.com:mauricioaniche/springlint.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>springlint-0.4</tag>
   </scm>
 
 
