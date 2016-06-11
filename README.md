@@ -15,7 +15,7 @@ java -jar springlint
 Or if you like Maven:
 
 ```
-mvn com.github.mauricioaniche:springlint-maven-plugin:0.3:springlint
+mvn com.github.mauricioaniche:springlint-maven-plugin:0.4:springlint
 ```
 
 Then, just check the generated html.
