@@ -152,5 +152,9 @@ public class SmellyClass {
 	public Set<SmellDescription> getSmells() {
 		return smells;
 	}
+
+	public boolean isClass() {
+		return type.equals("class");
+	}
 	
 }

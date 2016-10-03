@@ -30,6 +30,15 @@ public class SmellsRequestor extends FileASTRequestor {
 		try {
 		
 			SmellyClass clazz = repo.get(sourceFilePath);
+			if(clazz==null) {
+				log.warn("this file was not processed before: " + sourceFilePath);
+				return;
+			}
+			if(!clazz.isClass()) {
+				log.debug("this file is not a class: " + sourceFilePath);
+				return;
+			}
+			
 			log.info("Analysing class " + clazz.getName());
 			
 			for(Smell smell : smells) {

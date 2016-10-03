@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.AnnotatableType;
+import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration;
 import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Type;
@@ -29,6 +31,13 @@ public class ClassInfoVisitor extends ASTVisitor {
 		getSuperclass(node);
 		getInterfaces(node);
 		
+		
+		return false;
+	}
+	
+	public boolean visit(AnnotationTypeDeclaration node) {
+		getFullClassName(node.resolveBinding());
+		this.type = "annotation";
 		
 		return false;
 	}

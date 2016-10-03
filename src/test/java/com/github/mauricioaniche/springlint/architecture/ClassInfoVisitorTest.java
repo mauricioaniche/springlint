@@ -34,6 +34,15 @@ public class ClassInfoVisitorTest extends SmellTest {
 	}
 
 	@Test
+	public void shouldDetectAnnotations() {
+		run("class-info/t4");
+		
+		ClassInfoVisitor visitor = visitors.get("Ann.java");
+		Assert.assertEquals("foo.Ann", visitor.getClassName());
+		Assert.assertEquals("annotation", visitor.getType());
+	}
+
+	@Test
 	public void shouldDetectSuperclasses() {
 		run("class-info/t2");
 		
