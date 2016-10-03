@@ -52,10 +52,10 @@ public class SpringLint {
 		}
 		
 		long startTime = System.currentTimeMillis();
-		log.info("# ----------------------------------------- #");
-		log.info("#          Smelly Cat - Spring MVC          #");
-		log.info("#  www.github.com/mauricioaniche/smellycat  #");
-		log.info("# ----------------------------------------- #");
+		log.info("# ------------------------------------------ #");
+		log.info("#                 SpringLint                 #");
+		log.info("#  www.github.com/mauricioaniche/springlint  #");
+		log.info("# ------------------------------------------ #");
 		
 		new RunAllAnalysis(arch, projectPath, output).run();
 		
