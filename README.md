@@ -56,11 +56,11 @@ Currently, we support 6 smells:
 
 - **Promiscuous Controller**: When a Controller offers too many actions.
 
-- **Smart Controller**: When a Controller offers too much flow control.
+- **Brain Controller**: When a Controller offers too much flow control.
 
 - **Meddling Service**: A Service that directly queries the database.
 
-- **Smart repositories**: Complex logic in the Repositories.
+- **Brain repositories**: Complex logic in the Repositories.
 
 - **Laborious Repository Method**: A method in a Repository that performs multiple actions 
 with the database.
