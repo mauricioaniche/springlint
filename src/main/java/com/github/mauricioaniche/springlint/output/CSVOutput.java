@@ -23,7 +23,7 @@ public class CSVOutput implements Output{
 	@Override
 	public void printOutput(Architecture arch, Map<String, List<CKNumber>> ckResults, Repository smellResults) {
 		
-		output.println("project,file,name,role,smell,note");
+		output.println("file,name,role,smell,note");
 		for(SmellyClass clazz : smellResults.all()) {
 			for(SmellDescription description : clazz.getSmells()) {
 				output.println(
