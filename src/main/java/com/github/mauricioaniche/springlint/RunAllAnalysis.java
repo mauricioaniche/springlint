@@ -10,6 +10,7 @@ import com.github.mauricioaniche.springlint.analysis.ck.CKAnalysis;
 import com.github.mauricioaniche.springlint.analysis.smells.SmellAnalysis;
 import com.github.mauricioaniche.springlint.architecture.Architecture;
 import com.github.mauricioaniche.springlint.domain.Repository;
+import com.github.mauricioaniche.springlint.output.CSVOutput;
 import com.github.mauricioaniche.springlint.output.Output;
 
 import br.com.aniche.ck.CKNumber;
@@ -30,10 +31,14 @@ public class RunAllAnalysis {
 	}
 
 	public void run() throws FileNotFoundException {
-		CKAnalysis ck = new CKAnalysis(arch,projectPath);
 		
-		log.info("Running CK metrics");
-		Map<String, List<CKNumber>> ckResults = ck.run();
+		// FIXME: for now, CSV doesnt print code metrics, so it makes CSV more performatic
+		Map<String, List<CKNumber>> ckResults = null;
+		if(!(output instanceof CSVOutput)) {
+			log.info("Running CK metrics");
+			CKAnalysis ck = new CKAnalysis(arch,projectPath);
+			ckResults = ck.run();
+		}
 		
 		log.info("Looking for smells");
 		SmellAnalysis smells = new SmellAnalysis(arch, projectPath);
