@@ -27,7 +27,7 @@ public class Parser {
 
 	static {
 		String jdtMaxProp = System.getProperty("jdt.max");
-		String jdtMaxEnv = System.getenv("jdt.max");
+		String jdtMaxEnv = System.getenv("JDT_MAX");
 		if(jdtMaxProp!=null) {
 			MAX_AT_ONCE = Integer.parseInt(jdtMaxProp);
 		} else if(jdtMaxEnv != null) {
