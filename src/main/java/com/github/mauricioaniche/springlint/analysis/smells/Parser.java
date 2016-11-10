@@ -26,10 +26,13 @@ public class Parser {
 	private String[] javaFiles;
 
 	static {
-		String jdtMax = System.getProperty("jdt.max");
-		if(jdtMax!=null) {
-			MAX_AT_ONCE = Integer.parseInt(jdtMax);
-		} else {
+		String jdtMaxProp = System.getProperty("jdt.max");
+		String jdtMaxEnv = System.getenv("jdt.max");
+		if(jdtMaxProp!=null) {
+			MAX_AT_ONCE = Integer.parseInt(jdtMaxProp);
+		} else if(jdtMaxEnv != null) {
+			MAX_AT_ONCE = Integer.parseInt(jdtMaxEnv);
+		}else {
 			long maxMemory= Runtime.getRuntime().maxMemory() / (1 << 20); // in MiB
 			
 			if      (maxMemory >= 2000) MAX_AT_ONCE= 400;
