@@ -28,6 +28,18 @@ public class MeddlingServiceTest extends SmellTest {
 		Assert.assertEquals(1, sc.getAttribute("use-persistence-mechanism"));
 	}
 	
+	@Test
+	public void shouldIgnoreExceptions() {
+		SmellAnalysis tool = new SmellAnalysis(arch, basePath + "dbquerying-service/t2");
+		Repository repo = tool.run();
+		
+		SmellyClass sc = repo.getByClass("jp.co.acroquest.endosnipe.web.dashboard.service.SignalService");
+		Assert.assertEquals(0, sc.getAttribute("use-persistence-mechanism"));
+
+		SmellyClass sc2 = repo.getByClass("jp.co.acroquest.endosnipe.web.dashboard.service.SignalService2");
+		Assert.assertEquals(0, sc2.getAttribute("use-persistence-mechanism"));
+	}
+	
 
 	@Test
 	public void shouldDetectTheUseOfJPA() {

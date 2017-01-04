@@ -49,6 +49,9 @@ public class PersistenceAPIs {
 	}
 	
 	public static boolean isOnPersistenceMechanism(String type) {
+		boolean typeIsAnException = type.endsWith("Exception");
+		if(typeIsAnException) return false;
+		
 		return persistenceApis.stream().anyMatch(api -> type.startsWith(api));
 	}
 

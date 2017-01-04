@@ -19,6 +19,7 @@ public class UsePersistenceMechanismVisitor extends VariablesAndFieldsVisitor {
 	
 	public boolean visit(MethodInvocation node) {
 		boolean wasInvokedInADependency = node.getExpression()!=null;
+		
 		if(wasInvokedInADependency && PersistenceAPIs.isOnPersistenceMechanism(findType(node))) {
 			clazz.setAttribute("use-persistence-mechanism", 1);
 		}
