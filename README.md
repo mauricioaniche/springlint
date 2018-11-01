@@ -1,5 +1,7 @@
 # SpringLint
 
+[pt-br](README_pt.md)
+
 SpringLint is a simple tool that performs code metrics and code smells analysis in your Spring MVC systems.
 The tool is based on Maurício Aniche's PhD thesis. 
 
